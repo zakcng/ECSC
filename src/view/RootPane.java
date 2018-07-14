@@ -16,6 +16,7 @@ public class RootPane extends BorderPane {
 	private MyMenuBar mmb;
 	private TabPane tp;
 	private LoginPane lp;
+	private ChatPane cp;
 	
 	public RootPane() {
 		//background
@@ -24,14 +25,15 @@ public class RootPane extends BorderPane {
 		mmb = new MyMenuBar();
 		tp = new TabPane();
 		lp = new LoginPane();
+		cp = new ChatPane();
 
 		tp.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
 
 		Tab t1 = new Tab("Login", lp);
-		//Tab t2 = new Tab("Select Modules", smp);
+		Tab t2 = new Tab("Chat", cp);
 		//t2.setDisable(true);
 
-		tp.getTabs().addAll(t1);
+		tp.getTabs().addAll(t1,t2);
 
 
 		this.setTop(mmb);

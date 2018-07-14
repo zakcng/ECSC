@@ -40,8 +40,8 @@ public class LoginPane extends BorderPane {
         txtNickname = new TextField();
 
         HBox ButtonPane = new HBox();
-        Button btnNewChat = new Button("New Chat");
-        Button btnJoinChat = new Button("Join Chat");
+        btnNewChat = new Button("New Chat");
+        btnJoinChat = new Button("Join Chat");
         ButtonPane.setAlignment(Pos.CENTER);
         ButtonPane.setSpacing(5);
 
