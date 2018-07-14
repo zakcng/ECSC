@@ -44,7 +44,7 @@ public class Controller {
 
 
 		mmb.addExitHandler(e -> System.exit(0));
-		mmb.addAboutHandler(e -> this.alertDialogBuilder(AlertType.INFORMATION, "Information Dialog", null, "EPC v1.0"));
+		mmb.addAboutHandler(e -> this.alertDialogBuilder(AlertType.INFORMATION, "Information Dialog", null, "EPC v1.0" + System.lineSeparator() + "Zak Ng" + System.lineSeparator() + "Lewys Ward"));
 	}
 
 	/* this method attaches bindings in the view, e.g. for validation, and to the model to ensure synchronisation between the data model and view */
