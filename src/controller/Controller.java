@@ -32,7 +32,7 @@ public class Controller {
 		mmb = view.getMenuBar();
 
 		//attach event handlers to view using private helper method
-		this.attachEventHandlers();	
+		this.attachEventHandlers();
 
 		//attach bindings within view using private helper method
 		this.attachBindings();
