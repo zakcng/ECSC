@@ -20,34 +20,14 @@ public class MyMenuBar extends javafx.scene.control.MenuBar {
 
 		menu = new Menu("_File");
 
-		loadItem = new MenuItem("_Load");
-		loadItem.setAccelerator(KeyCombination.keyCombination("SHORTCUT+L"));
-		menu.getItems().add(loadItem);
 
-		saveItem = new MenuItem("_Save");
-		saveItem.setAccelerator(KeyCombination.keyCombination("SHORTCUT+S"));
-		menu.getItems().add(saveItem);
-
-		menu.getItems().add( new SeparatorMenuItem());
+		//menu.getItems().add( new SeparatorMenuItem());
 
 		exitItem = new MenuItem("E_xit");
 		exitItem.setAccelerator(KeyCombination.keyCombination("SHORTCUT+X"));
 		menu.getItems().add(exitItem);
 
 		this.getMenus().add(menu);
-
-		menu = new Menu("_Show name");
-
-		individSelectItem = new MenuItem("_Individual selection");
-		individSelectItem.setAccelerator(KeyCombination.keyCombination("SHORTCUT+I"));
-		menu.getItems().add(individSelectItem); 
-
-		multiSelectItem = new MenuItem("_Multiple selection");
-		multiSelectItem.setAccelerator(KeyCombination.keyCombination("SHORTCUT+M"));
-		menu.getItems().add(multiSelectItem); 
-
-		this.getMenus().add(menu);     
-
 
 		menu = new Menu("_Help");
 
