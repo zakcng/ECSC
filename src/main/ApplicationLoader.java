@@ -13,8 +13,6 @@ public class ApplicationLoader extends Application {
 
 	@Override
 	public void init() {
-		//create model and view and pass their references to the controller
-		//StudentProfile model = new StudentProfile();
 		view = new RootPane();
 		Model model = new Model();
 
