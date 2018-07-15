@@ -30,7 +30,7 @@ public class LoginPane extends BorderPane {
 
         lvwChats = new ListView<>(olChats);
 
-        NewChatPane ncp = new NewChatPane();
+        ncp = new NewChatPane();
 
         GridPane gp = new GridPane();
         gp.setPadding(new Insets(80, 80, 80, 80));
@@ -64,8 +64,12 @@ public class LoginPane extends BorderPane {
 
     }
 
-    /*public void addBtnNewChatHandler(EventHandler<ActionEvent> handler) {
-        btnNewChat.setOnAction(handler);
-    }*/
+    public void addJoinHandler(EventHandler<ActionEvent> handler) {
+        btnJoinChat.setOnAction(handler);
+    }
+
+    public NewChatPane getNcp() {
+        return ncp;
+    }
 
 }

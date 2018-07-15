@@ -1,5 +1,7 @@
 package view;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -11,12 +13,13 @@ import javafx.scene.layout.GridPane;
 
 
 public class NewChatPane extends BorderPane{
-    TextField txtName, txtChatPassword;
-    CheckBox cbChatPassChecked;
-    Button btnCreate;
+    private TextField txtName, txtChatPassword;
+    private CheckBox cbChatPassChecked;
+    private Button btnCreate;
+    private GridPane gp;
 
     public NewChatPane() {
-        GridPane gp = new GridPane();
+        gp = new GridPane();
         gp.setPadding(new Insets(80, 80, 80, 80));
         gp.setVgap(15);
         gp.setHgap(20);
@@ -38,6 +41,10 @@ public class NewChatPane extends BorderPane{
 
         this.setCenter(gp);
 
+    }
+
+    public void addCreateHandler(EventHandler<ActionEvent> handler) {
+        btnCreate.setOnAction(handler);
     }
 
 }

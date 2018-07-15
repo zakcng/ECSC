@@ -33,13 +33,10 @@ public class Controller {
 	private LoginPane lp;
 	private NewChatPane ncp;
 	private Model model;
-	private Stage stage;
 
-	public Controller(RootPane view, Model model, Stage stage) {
+	public Controller(RootPane view, Model model) {
 		//initialise model and view fields
 		this.model = model;
-		this.stage = stage;
-
 
 		mmb = view.getMenuBar();
 		ncp = view.getNcp();
@@ -55,7 +52,9 @@ public class Controller {
 	private void attachEventHandlers() {
 		//attaching event handlers
 		//bp.addAddHandler(new AddHandler());
-		//lp.addBtnNewChatHandler(new NewChatHandler());
+
+		lp.addJoinHandler(new ChatHandler());
+		lp.getNcp().addCreateHandler(new ChatHandler());
 
 		mmb.addExitHandler(e -> System.exit(0));
 		mmb.addAboutHandler(e -> this.alertDialogBuilder(AlertType.INFORMATION, "Information Dialog", null, "EPC v1.0" + System.lineSeparator() + "Zak Ng" + System.lineSeparator() + "Lewys Ward"));
@@ -68,11 +67,23 @@ public class Controller {
 
 	}
 
+	private class CreateChatHandler implements EventHandler<ActionEvent> {
 
-	private class NewChatHandler implements EventHandler<ActionEvent> {
+		public void handle(ActionEvent e) {
+			System.out.println("Test");
+			System.exit(0);
+
+		}
+	}
+
+
+
+
+	private class ChatHandler implements EventHandler<ActionEvent> {
 
 		public void handle(ActionEvent e) {
 			//CODE
+			System.out.println("Testing");
 
 		}
 	}
