@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.io.*;
 import java.net.Socket;
 import java.net.SocketException;
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Client {
@@ -18,15 +19,22 @@ public class Client {
         dataOutputStream = new DataOutputStream(s.getOutputStream());
         dataInputStream = new DataInputStream(s.getInputStream());
         Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Server: " + dataInputStream.readUTF());
+        dataOutputStream.writeUTF(scanner.nextLine());
+        System.out.println("Server: " + dataInputStream.readUTF());
+        dataOutputStream.writeUTF(scanner.nextLine());
         while (true) {
             try {
-                String msg = scanner.nextLine();
-                dataOutputStream.writeUTF(msg);
-                System.out.println("Server Response: " + dataInputStream.readUTF());
-
+                dataOutputStream.writeUTF(scanner.nextLine());
+                System.out.println("Server: " + dataInputStream.readUTF());
             } catch (SocketException e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    public String hash(String text) {
+        return text;
     }
 }
