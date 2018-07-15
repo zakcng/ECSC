@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
+import javafx.stage.Stage;
 import javafx.scene.control.Label;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -32,10 +33,13 @@ public class Controller {
 	private LoginPane lp;
 	private NewChatPane ncp;
 	private Model model;
+	private Stage stage;
 
-	public Controller(RootPane view, Model model) {
+	public Controller(RootPane view, Model model, Stage stage) {
 		//initialise model and view fields
 		this.model = model;
+		this.stage = stage;
+
 
 		mmb = view.getMenuBar();
 		ncp = view.getNcp();
@@ -64,20 +68,14 @@ public class Controller {
 
 	}
 
-	/*
+
 	private class NewChatHandler implements EventHandler<ActionEvent> {
 
 		public void handle(ActionEvent e) {
-			final Stage dialog = new Stage();
-			dialog.initModality(Modality.APPLICATION_MODAL);
-			dialog.initOwner();
-
-			Scene dialogScene = new Scene(ncp, 300, 200);
-			dialog.setScene(dialogScene);
-			dialog.show();
+			//CODE
 
 		}
-	}*/
+	}
 
 	/*
 	private class AddHandler implements EventHandler<ActionEvent> {

@@ -20,7 +20,6 @@ public class ChatPane extends BorderPane {
     private ObservableList<List> olUsers;
 
 
-
     public ChatPane() {
         olUsers = FXCollections.observableArrayList();
 
@@ -40,22 +39,25 @@ public class ChatPane extends BorderPane {
 
         VBox.setVgrow(lvwUsers, Priority.ALWAYS);
 
-        activePane.getChildren().addAll(lblActive,separator1,lvwUsers);
+        activePane.getChildren().addAll(lblActive, separator1, lvwUsers);
 
         Separator separator2 = new Separator();
         separator2.setOrientation(Orientation.VERTICAL);
         leftContainer.getChildren().addAll(activePane, separator2);
 
         txtMessages = new TextArea();
+        txtMessages.setDisable(true);
 
         HBox bottomContainer = new HBox();
         btnSend = new Button("Send");
         txtOutgoing = new TextField();
-        HBox.setHgrow(txtOutgoing,Priority.ALWAYS);
-        bottomContainer.getChildren().addAll(txtOutgoing,btnSend);
+        HBox.setHgrow(txtOutgoing, Priority.ALWAYS);
+        bottomContainer.setPadding(new Insets(5, 0, 0, 0));
+        bottomContainer.setSpacing(5);
+        bottomContainer.getChildren().addAll(txtOutgoing, btnSend);
 
         inner.setCenter(txtMessages);
-inner.setBottom(bottomContainer);
+        inner.setBottom(bottomContainer);
 
         this.setCenter(inner);
         this.setLeft(leftContainer);

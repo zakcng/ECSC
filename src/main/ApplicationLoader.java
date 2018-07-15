@@ -10,13 +10,14 @@ import view.RootPane;
 public class ApplicationLoader extends Application {
 
 	private RootPane view;
+	private Stage stage;
 
 	@Override
 	public void init() {
 		view = new RootPane();
 		Model model = new Model();
 
-		new Controller(view, model);
+		new Controller(view, model,stage);
 	}
 	
 	@Override

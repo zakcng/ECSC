@@ -34,9 +34,9 @@ public class RootPane extends BorderPane {
 		Tab t1 = new Tab("Login", lp);
 		Tab t2 = new Tab("Chat", cp);
 		//t2.setDisable(true);
-		Tab t3 = new Tab("New Chat Pane", ncp);
+		//Tab t3 = new Tab("New Chat Pane", ncp);
 
-		tp.getTabs().addAll(t1,t2,t3);
+		tp.getTabs().addAll(t1,t2);
 
 
 		this.setTop(mmb);

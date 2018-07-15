@@ -17,9 +17,10 @@ import javafx.scene.layout.HBox;
 import java.util.List;
 
 public class LoginPane extends BorderPane {
+    private NewChatPane ncp;
 
     private TextField txtNickname;
-    private Button btnNewChat, btnJoinChat;
+    private Button btnJoinChat;
 
     private ListView<List> lvwChats;
     private ObservableList<List> olChats;
@@ -28,6 +29,8 @@ public class LoginPane extends BorderPane {
         olChats = FXCollections.observableArrayList();
 
         lvwChats = new ListView<>(olChats);
+
+        NewChatPane ncp = new NewChatPane();
 
         GridPane gp = new GridPane();
         gp.setPadding(new Insets(80, 80, 80, 80));
@@ -42,12 +45,11 @@ public class LoginPane extends BorderPane {
         txtNickname = new TextField();
 
         HBox ButtonPane = new HBox();
-        btnNewChat = new Button("New Chat");
         btnJoinChat = new Button("Join Chat");
         ButtonPane.setAlignment(Pos.CENTER);
         ButtonPane.setSpacing(5);
 
-        ButtonPane.getChildren().addAll(btnNewChat,btnJoinChat);
+        ButtonPane.getChildren().addAll(btnJoinChat);
 
 
         gp.add(lblNickname,0,0);
@@ -57,12 +59,13 @@ public class LoginPane extends BorderPane {
         gp.add(ButtonPane,0,4);
 
         this.setCenter(gp);
+        this.setRight(ncp);
         //this.setBottom(ButtonPane);
 
     }
 
-    public void addBtnNewChatHandler(EventHandler<ActionEvent> handler) {
+    /*public void addBtnNewChatHandler(EventHandler<ActionEvent> handler) {
         btnNewChat.setOnAction(handler);
-    }
+    }*/
 
 }
