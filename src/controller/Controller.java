@@ -9,12 +9,18 @@ import java.io.ObjectOutputStream;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
+import javafx.scene.control.Label;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import model.Model;
 
+import view.LoginPane;
 import view.MyMenuBar;
+import view.NewChatPane;
 import view.RootPane;
 
 
@@ -23,6 +29,8 @@ public class Controller {
 
 	//fields to be used throughout the class
 	private MyMenuBar mmb;
+	private LoginPane lp;
+	private NewChatPane ncp;
 	private Model model;
 
 	public Controller(RootPane view, Model model) {
@@ -30,6 +38,8 @@ public class Controller {
 		this.model = model;
 
 		mmb = view.getMenuBar();
+		ncp = view.getNcp();
+		lp = view.getLoginPane();
 
 		//attach event handlers to view using private helper method
 		this.attachEventHandlers();	
@@ -41,7 +51,7 @@ public class Controller {
 	private void attachEventHandlers() {
 		//attaching event handlers
 		//bp.addAddHandler(new AddHandler());
-
+		//lp.addBtnNewChatHandler(new NewChatHandler());
 
 		mmb.addExitHandler(e -> System.exit(0));
 		mmb.addAboutHandler(e -> this.alertDialogBuilder(AlertType.INFORMATION, "Information Dialog", null, "EPC v1.0" + System.lineSeparator() + "Zak Ng" + System.lineSeparator() + "Lewys Ward"));
@@ -53,6 +63,21 @@ public class Controller {
 		//bp.addBtnDisableBind(np.isEitherFieldEmpty());
 
 	}
+
+	/*
+	private class NewChatHandler implements EventHandler<ActionEvent> {
+
+		public void handle(ActionEvent e) {
+			final Stage dialog = new Stage();
+			dialog.initModality(Modality.APPLICATION_MODAL);
+			dialog.initOwner();
+
+			Scene dialogScene = new Scene(ncp, 300, 200);
+			dialog.setScene(dialogScene);
+			dialog.show();
+
+		}
+	}*/
 
 	/*
 	private class AddHandler implements EventHandler<ActionEvent> {

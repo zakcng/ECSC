@@ -2,6 +2,8 @@ package view;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -58,4 +60,9 @@ public class LoginPane extends BorderPane {
         //this.setBottom(ButtonPane);
 
     }
+
+    public void addBtnNewChatHandler(EventHandler<ActionEvent> handler) {
+        btnNewChat.setOnAction(handler);
+    }
+
 }

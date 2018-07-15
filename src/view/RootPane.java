@@ -17,6 +17,7 @@ public class RootPane extends BorderPane {
 	private TabPane tp;
 	private LoginPane lp;
 	private ChatPane cp;
+	private NewChatPane ncp;
 	
 	public RootPane() {
 		//background
@@ -26,14 +27,16 @@ public class RootPane extends BorderPane {
 		tp = new TabPane();
 		lp = new LoginPane();
 		cp = new ChatPane();
+		ncp = new NewChatPane();
 
 		tp.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
 
 		Tab t1 = new Tab("Login", lp);
 		Tab t2 = new Tab("Chat", cp);
 		//t2.setDisable(true);
+		Tab t3 = new Tab("New Chat Pane", ncp);
 
-		tp.getTabs().addAll(t1,t2);
+		tp.getTabs().addAll(t1,t2,t3);
 
 
 		this.setTop(mmb);
@@ -50,5 +53,13 @@ public class RootPane extends BorderPane {
 
 	public LoginPane getLoginPane() {
 		return lp;
+	}
+
+	public NewChatPane getNcp() {
+		return ncp;
+	}
+
+	public RootPane getRootPane() {
+		return this;
 	}
 }
