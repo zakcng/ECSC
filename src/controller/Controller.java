@@ -5,11 +5,14 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
+import main.Client;
 import model.User;
 import model.Chat;
 import model.Model;
 
 import view.*;
+
+import java.io.IOException;
 
 
 public class Controller {
@@ -20,10 +23,14 @@ public class Controller {
 	private NewChatPane ncp;
 	private ChatPane cp;
 	private Model model;
+	private Client client;
+	private final int OK = 0;
+	private final int ERROR = 1;
 
 	public Controller(RootPane view, Model model) {
 		//initialise model and view fields
 		this.model = model;
+		this.client = new Client("127.0.0.1", 10000);
 
 		mmb = view.getMenuBar();
 		ncp = view.getNcp();
@@ -57,9 +64,34 @@ public class Controller {
 
 	}
 
+	/**
+	 * Client code goes to server when handled in this class
+	 */
 	private class CreateChatHandler implements EventHandler<ActionEvent> {
 
 		public void handle(ActionEvent e) {
+			String name = lp.getNcp().getTxtName();
+			String hashedPass = client.hash(lp.getNcp().getTxtChatPassword());
+			Boolean passEnabled = lp.getNcp().getCbChatPassChecked().isSelected();
+			Boolean logEnabled = lp.getNcp().getCbChatLogChecked().isSelected();
+
+			try {
+				int response = -1;
+
+				do {
+					response = client.createChat(name, hashedPass, passEnabled, logEnabled);
+
+					if (response == ERROR) {
+						System.out.println("Error, server could not create chat.");
+						System.out.println("Ensure a unique server name and non blank password if enabled.");
+					}
+				} while (response != OK);
+
+			} catch (IOException E) {
+				E.printStackTrace();
+			}
+
+			/*
 			System.out.println("Chat room name:");
 			System.out.println(lp.getNcp().getTxtName());
 
@@ -71,11 +103,13 @@ public class Controller {
 
 			System.out.println("Is chat logs checked?");
 			System.out.println(lp.getNcp().getCbChatLogChecked().isSelected());
-
+			/*
+			/*
 			if(lp.getNcp().getCbChatPassChecked().isSelected() == false) {
 				createChat(lp.getNcp().getTxtName(),null,lp.getNcp().getCbChatLogChecked().isSelected());
 			} else
 			createChat(lp.getNcp().getTxtName(),lp.getNcp().getTxtChatPassword(),lp.getNcp().getCbChatLogChecked().isSelected());
+			*/
 		}
 	}
 
