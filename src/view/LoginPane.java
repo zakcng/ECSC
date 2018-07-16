@@ -64,6 +64,10 @@ public class LoginPane extends BorderPane {
 
     }
 
+    public String getNickname() {
+        return txtNickname.getText();
+    }
+
     public void addJoinHandler(EventHandler<ActionEvent> handler) {
         btnJoinChat.setOnAction(handler);
     }

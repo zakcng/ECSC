@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import javafx.scene.control.Label;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import main.User;
 import model.Chat;
 import model.Model;
 
@@ -96,7 +97,8 @@ public class Controller {
 	private class ChatHandler implements EventHandler<ActionEvent> {
 
 		public void handle(ActionEvent e) {
-			//CODE
+			User user = new User(lp.getNickname());
+			
 			System.out.println("Testing");
 
 		}
