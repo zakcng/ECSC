@@ -20,11 +20,7 @@ import javafx.stage.Stage;
 import model.Chat;
 import model.Model;
 
-import view.LoginPane;
-import view.MyMenuBar;
-import view.NewChatPane;
-import view.RootPane;
-
+import view.*;
 
 
 public class Controller {
@@ -33,6 +29,7 @@ public class Controller {
 	private MyMenuBar mmb;
 	private LoginPane lp;
 	private NewChatPane ncp;
+	private ChatPane cp;
 	private Model model;
 
 	public Controller(RootPane view, Model model) {
@@ -42,6 +39,7 @@ public class Controller {
 		mmb = view.getMenuBar();
 		ncp = view.getNcp();
 		lp = view.getLoginPane();
+		cp = view.getCp();
 
 		//attach event handlers to view using private helper method
 		this.attachEventHandlers();
@@ -58,7 +56,7 @@ public class Controller {
 		lp.getNcp().addCreateHandler(new CreateChatHandler());
 
 		mmb.addExitHandler(e -> System.exit(0));
-		mmb.addAboutHandler(e -> this.alertDialogBuilder(AlertType.INFORMATION, "Information Dialog", null, "EPC v1.0" + System.lineSeparator() + "Zak Ng" + System.lineSeparator() + "Lewys Ward"));
+		mmb.addAboutHandler(e -> this.alertDialogBuilder(AlertType.INFORMATION, "Information Dialog", null, "EPC v1.0" +  System.lineSeparator() + System.lineSeparator() + "Zak Ng" + System.lineSeparator() + "Lewys Ward"));
 	}
 
 	/* this method attaches bindings in the view, e.g. for validation, and to the model to ensure synchronisation between the data model and view */
@@ -112,6 +110,10 @@ public class Controller {
 
 	private void createChat(String chatName, String chatPassword, Boolean chatLog) {
 		Chat chat = new Chat(chatName, chatPassword, chatLog);
+	}
+
+	private void appendTextArea(String line) {
+		cp.appendLineToTxtMessages(line);
 	}
 
 

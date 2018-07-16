@@ -63,4 +63,8 @@ public class ChatPane extends BorderPane {
         this.setLeft(leftContainer);
 
     }
+
+    public void appendLineToTxtMessages(String line) {
+        this.txtMessages.appendText(line);
+    }
 }

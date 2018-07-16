@@ -59,6 +59,10 @@ public class RootPane extends BorderPane {
 		return ncp;
 	}
 
+	public ChatPane getCp() {
+		return cp;
+	}
+
 	public RootPane getRootPane() {
 		return this;
 	}
