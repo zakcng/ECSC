@@ -43,6 +43,18 @@ public class NewChatPane extends BorderPane{
 
     }
 
+    public String getTxtName() {
+        return txtName.getText();
+    }
+
+    public String getTxtChatPassword() {
+        return txtChatPassword.getText();
+    }
+
+    public CheckBox getCbChatPassChecked() {
+        return cbChatPassChecked;
+    }
+
     public void addCreateHandler(EventHandler<ActionEvent> handler) {
         btnCreate.setOnAction(handler);
     }

@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import javafx.scene.control.Label;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.Chat;
 import model.Model;
 
 import view.LoginPane;
@@ -54,7 +55,7 @@ public class Controller {
 		//bp.addAddHandler(new AddHandler());
 
 		lp.addJoinHandler(new ChatHandler());
-		lp.getNcp().addCreateHandler(new ChatHandler());
+		lp.getNcp().addCreateHandler(new CreateChatHandler());
 
 		mmb.addExitHandler(e -> System.exit(0));
 		mmb.addAboutHandler(e -> this.alertDialogBuilder(AlertType.INFORMATION, "Information Dialog", null, "EPC v1.0" + System.lineSeparator() + "Zak Ng" + System.lineSeparator() + "Lewys Ward"));
@@ -70,9 +71,19 @@ public class Controller {
 	private class CreateChatHandler implements EventHandler<ActionEvent> {
 
 		public void handle(ActionEvent e) {
-			System.out.println("Test");
-			System.exit(0);
+			System.out.println("Chat room name:");
+			System.out.println(lp.getNcp().getTxtName());
 
+			System.out.println("Chat room password:");
+			System.out.println(lp.getNcp().getTxtChatPassword());
+
+			System.out.println("Is password checked?");
+			System.out.println(lp.getNcp().getCbChatPassChecked().isSelected());
+
+			if(lp.getNcp().getCbChatPassChecked().isSelected() == false) {
+				createChat(lp.getNcp().getTxtName(),null);
+			} else
+			createChat(lp.getNcp().getTxtName(),lp.getNcp().getTxtChatPassword());
 		}
 	}
 
@@ -95,6 +106,10 @@ public class Controller {
 			//CODE
 		}
 	}*/
+
+	private void createChat(String chatName, String chatPassword) {
+		Chat chat = new Chat(chatName, chatPassword);
+	}
 
 
 	//helper method to build dialogs
