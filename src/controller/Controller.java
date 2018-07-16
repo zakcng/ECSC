@@ -55,6 +55,8 @@ public class Controller {
 		lp.addJoinHandler(new ChatHandler());
 		lp.getNcp().addCreateHandler(new CreateChatHandler());
 
+		//cp.addSendHandler(new HANDLER);
+
 		mmb.addExitHandler(e -> System.exit(0));
 		mmb.addAboutHandler(e -> this.alertDialogBuilder(AlertType.INFORMATION, "Information Dialog", null, "EPC v1.0" +  System.lineSeparator() + System.lineSeparator() + "Zak Ng" + System.lineSeparator() + "Lewys Ward"));
 	}

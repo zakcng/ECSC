@@ -2,6 +2,8 @@ package view;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.scene.control.*;
@@ -67,4 +69,17 @@ public class ChatPane extends BorderPane {
     public void appendLineToTxtMessages(String line) {
         this.txtMessages.appendText(line);
     }
+
+    public void clearTxtMessages() {
+        this.txtMessages.clear();
+    }
+
+    public String getTxtMessages() {
+        return this.txtMessages.getText();
+    }
+
+    public void addSendHandler(EventHandler<ActionEvent> handler) {
+        btnSend.setOnAction(handler);
+    }
+
 }
