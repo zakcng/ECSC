@@ -14,7 +14,7 @@ import javafx.scene.layout.GridPane;
 
 public class NewChatPane extends BorderPane{
     private TextField txtName, txtChatPassword;
-    private CheckBox cbChatPassChecked;
+    private CheckBox cbChatPassChecked, cbChatLogChecked;
     private Button btnCreate;
     private GridPane gp;
 
@@ -29,6 +29,7 @@ public class NewChatPane extends BorderPane{
         txtChatPassword = new TextField("Chat Password");
 
         cbChatPassChecked = new CheckBox("Enabled");
+        cbChatLogChecked = new CheckBox("Chat Logs");
 
         btnCreate = new Button("New Chat");
 
@@ -37,7 +38,9 @@ public class NewChatPane extends BorderPane{
         gp.add(txtChatPassword,0,1);
         gp.add(cbChatPassChecked,1,1);
 
-        gp.add(btnCreate,0,2);
+        gp.add(cbChatLogChecked,0,2);
+
+        gp.add(btnCreate,0,3);
 
         this.setCenter(gp);
 
@@ -53,6 +56,10 @@ public class NewChatPane extends BorderPane{
 
     public CheckBox getCbChatPassChecked() {
         return cbChatPassChecked;
+    }
+
+    public CheckBox getCbChatLogChecked() {
+        return cbChatLogChecked;
     }
 
     public void addCreateHandler(EventHandler<ActionEvent> handler) {

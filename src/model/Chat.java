@@ -3,10 +3,12 @@ package model;
 public class Chat {
 
     private String chatName, chatPassword;
+    private Boolean chatLogs;
 
-    public Chat(String chatName, String chatPassword) {
+    public Chat(String chatName, String chatPassword, Boolean chatLogs) {
         this.chatName = chatName;
         this.chatPassword = chatPassword;
+        this.chatLogs = chatLogs;
     }
 
     public void setChatName(String chatName) {
@@ -17,11 +19,19 @@ public class Chat {
         this.chatPassword = chatPassword;
     }
 
+    public void setChatLogs(Boolean chatLogs) {
+        this.chatLogs = chatLogs;
+    }
+
     public String getChatName() {
         return chatName;
     }
 
     public String getChatPassword() {
         return chatPassword;
+    }
+
+    public Boolean getChatLogs() {
+        return chatLogs;
     }
 }

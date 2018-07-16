@@ -80,10 +80,13 @@ public class Controller {
 			System.out.println("Is password checked?");
 			System.out.println(lp.getNcp().getCbChatPassChecked().isSelected());
 
+			System.out.println("Is chat logs checked?");
+			System.out.println(lp.getNcp().getCbChatLogChecked().isSelected());
+
 			if(lp.getNcp().getCbChatPassChecked().isSelected() == false) {
-				createChat(lp.getNcp().getTxtName(),null);
+				createChat(lp.getNcp().getTxtName(),null,lp.getNcp().getCbChatLogChecked().isSelected());
 			} else
-			createChat(lp.getNcp().getTxtName(),lp.getNcp().getTxtChatPassword());
+			createChat(lp.getNcp().getTxtName(),lp.getNcp().getTxtChatPassword(),lp.getNcp().getCbChatLogChecked().isSelected());
 		}
 	}
 
@@ -107,8 +110,8 @@ public class Controller {
 		}
 	}*/
 
-	private void createChat(String chatName, String chatPassword) {
-		Chat chat = new Chat(chatName, chatPassword);
+	private void createChat(String chatName, String chatPassword, Boolean chatLog) {
+		Chat chat = new Chat(chatName, chatPassword, chatLog);
 	}
 
 
