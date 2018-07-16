@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3aef4558-5011-478b-a6e9-98fd1ae925b9" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/LoginPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LoginPane.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -51,8 +49,8 @@
       <file leaf-file-name="Controller.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/controller/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="370">
-              <caret line="100" column="12" selection-start-line="100" selection-start-column="12" selection-end-line="100" selection-end-column="12" />
+            <state relative-caret-position="1185">
+              <caret line="100" selection-start-line="100" selection-end-line="100" />
               <folding>
                 <element signature="e#3317#3318#0" expanded="true" />
                 <element signature="e#3352#3353#0" expanded="true" />
@@ -268,7 +266,7 @@
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="main.*" />
+          <option name="PATTERN" value="model.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -279,7 +277,7 @@
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="main.*" />
+          <option name="PATTERN" value="model.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -290,7 +288,7 @@
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="main.*" />
+          <option name="PATTERN" value="model.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -364,7 +362,7 @@
       <workItem from="1531737657468" duration="885000" />
       <workItem from="1531742578966" duration="409000" />
       <workItem from="1531743013451" duration="394000" />
-      <workItem from="1531743637769" duration="1817000" />
+      <workItem from="1531743637769" duration="2706000" />
     </task>
     <task id="LOCAL-00001" summary="Included Boolean chat log option to both GUI and Chat model">
       <created>1531742889119</created>
@@ -401,11 +399,18 @@
       <option name="project" value="LOCAL" />
       <updated>1531745045234</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="User class created">
+      <created>1531745473973</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1531745473973</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4093000" />
+    <option name="totallyTimeSpent" value="4982000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="950" extended-state="6" />
@@ -421,11 +426,11 @@
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.31309524" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.31309524" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18888289" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18888289" />
       <window_info anchor="bottom" id="Statistic" order="8" weight="0.32857144" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -454,7 +459,8 @@
     <MESSAGE value="Updated README.md" />
     <MESSAGE value="Added appendTextArea method" />
     <MESSAGE value="Added various useful ChatPane methods" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added various useful ChatPane methods" />
+    <MESSAGE value="User class created" />
+    <option name="LAST_COMMIT_MESSAGE" value="User class created" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/main/ApplicationLoader.java">
@@ -898,8 +904,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/controller/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="100" column="12" selection-start-line="100" selection-start-column="12" selection-end-line="100" selection-end-column="12" />
+        <state relative-caret-position="1185">
+          <caret line="100" selection-start-line="100" selection-end-line="100" />
           <folding>
             <element signature="e#3317#3318#0" expanded="true" />
             <element signature="e#3352#3353#0" expanded="true" />

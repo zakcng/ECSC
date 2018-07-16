@@ -1,23 +1,11 @@
 package controller;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-
-import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
-import javafx.stage.Stage;
-import javafx.scene.control.Label;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import main.User;
+import model.User;
 import model.Chat;
 import model.Model;
 
@@ -98,7 +86,7 @@ public class Controller {
 
 		public void handle(ActionEvent e) {
 			User user = new User(lp.getNickname());
-			
+
 			System.out.println("Testing");
 
 		}
