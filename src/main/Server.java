@@ -5,10 +5,7 @@ import model.Chat;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
 
 import static java.util.Objects.hash;
 
@@ -27,25 +24,26 @@ public class Server {
 
     public static void main(String[] args) throws IOException {
         ServerSocket listener = new ServerSocket(10000);
-        try {
-            while (true) {
-                //Establishes connection with client:
+
+        while (true) {
+            try {
+                System.out.println("Hi");
                 Socket socket = listener.accept();
                 dataInputStream = new DataInputStream(socket.getInputStream());
                 dataOutputStream = new DataOutputStream(socket.getOutputStream());
 
-                //Handles initial client request to join or create chat:
-                int clientRequest = dataInputStream.readByte();
-                handleRequest(clientRequest, dataInputStream, dataOutputStream);
+                while (true) {
+                    //Handles initial client request to join or create chat:
+                    int clientRequest = dataInputStream.readByte();
+                    handleRequest(clientRequest, dataInputStream, dataOutputStream);
 
-                System.out.println("Chatname: " + chats.get("chat").getChatName());
-                System.out.println("Password: " + chats.get("chat").getChatPassword());
-                System.out.println("Is Log Enabled: " + chats.get("chat").getChatLogs());
+                    printChats();
 
 
+                }
+            } finally {
+                listener.close();
             }
-        } finally {
-            listener.close();
         }
     }
 
@@ -92,5 +90,14 @@ public class Server {
     public static boolean validChat(Boolean passEnabled, String hashedPass, String chatName) {
         //True if chatName is not empty, and password is enabled and valid, or if password is disabled
         return (!chatName.equals("")) && ((passEnabled && !hashedPass.equals("")) || (!passEnabled));
+    }
+
+    public static void printChats() {
+        Iterator it = chats.entrySet().iterator();
+
+        while (it.hasNext()) {
+            HashMap.Entry pair = (HashMap.Entry)it.next();
+            System.out.println(pair.getKey() + " = " + pair.getValue());
+        }
     }
 }

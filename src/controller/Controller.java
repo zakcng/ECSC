@@ -70,6 +70,7 @@ public class Controller {
 	private class CreateChatHandler implements EventHandler<ActionEvent> {
 
 		public void handle(ActionEvent e) {
+			System.out.println("Hello");
 			String name = lp.getNcp().getTxtName();
 			String hashedPass = client.hash(lp.getNcp().getTxtChatPassword());
 			Boolean passEnabled = lp.getNcp().getCbChatPassChecked().isSelected();
@@ -78,14 +79,12 @@ public class Controller {
 			try {
 				int response = -1;
 
-				do {
-					response = client.createChat(name, hashedPass, passEnabled, logEnabled);
+				response = client.createChat(name, hashedPass, passEnabled, logEnabled);
 
-					if (response == ERROR) {
-						System.out.println("Error, server could not create chat.");
-						System.out.println("Ensure a unique server name and non blank password if enabled.");
-					}
-				} while (response != OK);
+				if (response == ERROR) {
+					System.out.println("Error, server could not create chat.");
+					System.out.println("Ensure a unique server name and non blank password if enabled.");
+				}
 
 			} catch (IOException E) {
 				E.printStackTrace();
