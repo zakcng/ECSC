@@ -20,7 +20,7 @@ public class LoginPane extends BorderPane {
     private NewChatPane ncp;
 
     private TextField txtNickname;
-    private Button btnJoinChat;
+    private Button btnJoinChat, btnRefreshChats;
 
     private ListView<List> lvwChats;
     private ObservableList<List> olChats;
@@ -46,11 +46,12 @@ public class LoginPane extends BorderPane {
 
         HBox ButtonPane = new HBox();
         btnJoinChat = new Button("Join Chat");
+        btnRefreshChats = new Button("Refresh Chats");
+
         ButtonPane.setAlignment(Pos.CENTER);
         ButtonPane.setSpacing(5);
 
-        ButtonPane.getChildren().addAll(btnJoinChat);
-
+        ButtonPane.getChildren().addAll(btnJoinChat,btnRefreshChats);
 
         gp.add(lblNickname,0,0);
         gp.add(txtNickname,0,1);
@@ -72,6 +73,9 @@ public class LoginPane extends BorderPane {
         btnJoinChat.setOnAction(handler);
     }
 
+    public void addRefreshHandler(EventHandler<ActionEvent> handler) {
+        btnRefreshChats.setOnAction(handler);
+    }
     public NewChatPane getNcp() {
         return ncp;
     }

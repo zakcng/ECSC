@@ -48,7 +48,7 @@ public class Controller {
 		//attaching event handlers
 		//bp.addAddHandler(new AddHandler());
 
-		lp.addJoinHandler(new ChatHandler());
+		lp.addJoinHandler(new JoinHandler());
 		lp.getNcp().addCreateHandler(new CreateChatHandler());
 
 		//cp.addSendHandler(new HANDLER);
@@ -115,16 +115,23 @@ public class Controller {
 
 
 
-	private class ChatHandler implements EventHandler<ActionEvent> {
+	private class JoinHandler implements EventHandler<ActionEvent> {
 
 		public void handle(ActionEvent e) {
 			User user = new User(lp.getNickname());
 
-			System.out.println("Testing");
+			System.out.println("Join testing");
 
 		}
 	}
 
+	private class RefreshHandler implements EventHandler<ActionEvent> {
+
+		public void handle(ActionEvent e) {
+			System.out.println("Refresh testing");
+
+		}
+	}
 	/*
 	private class AddHandler implements EventHandler<ActionEvent> {
 
