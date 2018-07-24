@@ -6,6 +6,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
@@ -13,7 +14,8 @@ import javafx.scene.layout.GridPane;
 
 
 public class NewChatPane extends BorderPane{
-    private TextField txtName, txtChatPassword;
+    private TextField txtName;
+    private PasswordField txtChatPassword;
     private CheckBox cbChatPassChecked, cbChatLogChecked;
     private Button btnCreate;
     private GridPane gp;
@@ -26,7 +28,8 @@ public class NewChatPane extends BorderPane{
         gp.setAlignment(Pos.CENTER);
 
         txtName = new TextField("Room Name");
-        txtChatPassword = new TextField("Chat Password");
+        txtChatPassword = new PasswordField();
+        txtChatPassword.setPromptText("Chat Password");
 
         cbChatPassChecked = new CheckBox("Enabled");
         cbChatLogChecked = new CheckBox("Chat Logs");
