@@ -2,6 +2,7 @@ package main;
 
 import model.Chat;
 
+import javax.net.ssl.SSLSocket;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -16,18 +17,19 @@ public class ClientThread extends Thread {
     private static final int CREATE = 1;
     private static final int OK = 0;
     private static final int ERROR = 1;
-    private Socket socket;
+    private SSLSocket sslSocket;
 
-    public ClientThread(Socket socket) {
-        this.socket = socket;
+    public ClientThread(SSLSocket sslSocket) {
+        this.sslSocket = sslSocket;
     }
 
     public void run() {
+
         try {
             System.out.println("Hello, World!");
 
-            DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
-            DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
+            DataInputStream dataInputStream = new DataInputStream(sslSocket.getInputStream());
+            DataOutputStream dataOutputStream = new DataOutputStream(sslSocket.getOutputStream());
 
             while (true) {
                 //Handles initial client request to join or create chat:

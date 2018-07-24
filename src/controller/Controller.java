@@ -30,7 +30,7 @@ public class Controller {
 	public Controller(RootPane view, Model model) {
 		//initialise model and view fields
 		this.model = model;
-		this.client = new Client("127.0.0.1", 10000);
+		this.client = new Client();
 
 		mmb = view.getMenuBar();
 		ncp = view.getNcp();

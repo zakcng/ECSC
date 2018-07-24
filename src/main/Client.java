@@ -1,51 +1,39 @@
 package main;
 
-import javax.swing.*;
+import javax.net.ssl.SSLSocket;
+import javax.net.ssl.SSLSocketFactory;
 import java.io.*;
 import java.net.Socket;
-import java.net.SocketException;
-import java.net.UnknownHostException;
-import java.sql.SQLOutput;
-import java.util.Scanner;
+import java.security.Security;
+import com.sun.security.sasl.Provider;
 
 public class Client {
     //Default values provided if no arguments are provided during execution.
     private final String DEFAULT_IP = "127.0.0.1";
-    private static final int DEFAULT_PORT = 10000;
+    private static final Integer DEFAULT_PORT = 10000;
     private final int CREATE = 1;
     private final int JOIN = 0;
-    private String ipAddress;
-    private int port;
-    private Socket socket;
+    private SSLSocket sslSocket;
     private static DataOutputStream dataOutputStream;
     private static DataInputStream dataInputStream;
+    private static final String DEFAULT_TRUSTSTORE = System.getProperty("user.dir") + "/data/myTrustStore.jts";
+    private static final String DEFAULT_TRUSTORE_PASSWORD = "password";
 
     /**
-     * Will try to connect to specified ipAddress and port,
-     * if that fails will try to connect to default ipAddress and port,
-     * if that fails then will print error message
-     * @param ipAddress - ipAddress of server to connect to.
-     * @param port - port of chat on server to connect to.
+     * Will try to connect to default ip address and port nuber
      */
-    public Client(String ipAddress, int port) {
+    public Client() {
         try {
-            this.ipAddress = ipAddress;
-            this.port = port;
-            this.socket = new Socket(ipAddress, port);
-            dataInputStream = new DataInputStream(socket.getInputStream());
-            dataOutputStream = new DataOutputStream(socket.getOutputStream());
-        } catch (IOException e) {
-            try {
-                ipAddress = DEFAULT_IP;
-                port = DEFAULT_PORT;
-                this.socket = new Socket(ipAddress, port);
-                dataInputStream = new DataInputStream(socket.getInputStream());
-                dataOutputStream = new DataOutputStream(socket.getOutputStream());
-            } catch (IOException E) {
-                E.printStackTrace();
-                System.exit(1);
-            }
+            Security.addProvider(new Provider());
+            System.setProperty("javax.net.ssl.trustStore", DEFAULT_TRUSTSTORE);
+            System.setProperty("javax.net.ssl.trustStorePassword", DEFAULT_TRUSTORE_PASSWORD);
 
+            SSLSocketFactory sslSocketFactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
+            this.sslSocket = (SSLSocket) sslSocketFactory.createSocket(DEFAULT_IP, DEFAULT_PORT);
+            dataInputStream = new DataInputStream(sslSocket.getInputStream());
+            dataOutputStream = new DataOutputStream(sslSocket.getOutputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
     }
@@ -76,18 +64,6 @@ public class Client {
 
     public String hash(String text) {
         return text;
-    }
-
-    public String getIpAddress() {
-        return ipAddress;
-    }
-
-    public int getPort() {
-        return port;
-    }
-
-    public Socket getSocket() {
-        return socket;
     }
 
     public static DataOutputStream getDataOutputStream() {
