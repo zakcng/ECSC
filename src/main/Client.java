@@ -6,6 +6,8 @@ import java.io.*;
 import java.net.Socket;
 import java.security.Security;
 import com.sun.security.sasl.Provider;
+import org.bouncycastle.jcajce.provider.digest.SHA3;
+import org.bouncycastle.util.encoders.Hex;
 
 public class Client {
     //Default values provided if no arguments are provided during execution.
@@ -62,8 +64,12 @@ public class Client {
         return dataInputStream.readByte();
     }
 
-    public String hash(String text) {
-        return text;
+    public String hash(String stringToHash) {
+
+        SHA3.DigestSHA3 digestSHA3 = new SHA3.Digest512();
+        byte[] digest = digestSHA3.digest(stringToHash.getBytes());
+
+        return(Hex.toHexString(digest));
     }
 
     public static DataOutputStream getDataOutputStream() {
