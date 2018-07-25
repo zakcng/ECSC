@@ -20,13 +20,14 @@ public class LoginPane extends BorderPane {
     private TextField txtNickname;
     private Button btnJoinChat, btnRefreshChats;
 
-    private ListView<List> lvwChats;
-    private ObservableList<List> olChats;
+    private ListView<Chat> lvwChats;
+    private ObservableList<Chat> olChats;
 
     public LoginPane() {
         olChats = FXCollections.observableArrayList();
 
         lvwChats = new ListView<>(olChats);
+        lvwChats.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
         ncp = new NewChatPane();
 
@@ -75,16 +76,16 @@ public class LoginPane extends BorderPane {
         btnRefreshChats.setOnAction(handler);
     }
 
-    /*
+
     public void addChat(Chat c) {
         //Chat to String TODO
         olChats.add(c);
-    }*/
+    }
 
-    /*
-    public Chat getSelectedChat(MultipleSelectionModel<Chat> selectionModel) {
-        return selectionModel.getSelectedItem();
-    }*/
+
+    public Chat getSelectedChat() {
+        return lvwChats.getSelectionModel().getSelectedItem();
+    }
 
     public NewChatPane getNcp() {
         return ncp;

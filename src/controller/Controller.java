@@ -126,6 +126,9 @@ public class Controller {
 				System.out.println(user.getIpAddress());
 				System.out.println(user.getNickname());
 
+				//Print selected chat name as String
+				System.out.println(lp.getSelectedChat().toString());
+
 			}catch (Exception ex) {
 				ex.printStackTrace();
 			}
@@ -138,6 +141,10 @@ public class Controller {
 
 		public void handle(ActionEvent e) {
 			System.out.println("Refresh testing");
+
+			Chat c = new Chat("Test Chat","TestPass",false);
+
+			lp.addChat(c);
 
 		}
 	}

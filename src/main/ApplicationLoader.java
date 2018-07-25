@@ -13,16 +13,12 @@ public class ApplicationLoader extends Application {
 	@Override
 	public void init() {
 		view = new RootPane();
-		Model model = new Model();
 
-		new Controller(view, model);
+		new Controller(view);
 	}
 	
 	@Override
 	public void start(Stage stage) throws Exception {
-		//whilst you can set a min width and height (example shown below) for the stage window,
-		//you should not set a max width or height and the application should
-		//be able to be maximised to fill the screen and ideally behave sensibly when resized
 		stage.setMinWidth(650);
 		stage.setMinHeight(550);
 
