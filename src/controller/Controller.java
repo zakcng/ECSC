@@ -8,7 +8,6 @@ import javafx.scene.control.Alert.AlertType;
 import main.Client;
 import model.User;
 import model.Chat;
-import model.Model;
 
 import view.*;
 
@@ -22,14 +21,15 @@ public class Controller {
 	private LoginPane lp;
 	private NewChatPane ncp;
 	private ChatPane cp;
-	private Model model;
 	private Client client;
 	private final int OK = 0;
 	private final int ERROR = 1;
 
-	public Controller(RootPane view, Model model) {
+	//transient fields
+	private transient String hashedPass = null;
+
+	public Controller(RootPane view) {
 		//initialise model and view fields
-		this.model = model;
 		this.client = new Client();
 
 		mmb = view.getMenuBar();
@@ -74,7 +74,7 @@ public class Controller {
 		public void handle(ActionEvent e) {
 			System.out.println("Hello");
 			String name = lp.getNcp().getTxtName();
-			String hashedPass = client.hash(lp.getNcp().getTxtChatPassword());
+			hashedPass = client.hash(lp.getNcp().getTxtChatPassword());
 			Boolean passEnabled = lp.getNcp().getCbChatPassChecked().isSelected();
 			Boolean logEnabled = lp.getNcp().getCbChatLogChecked().isSelected();
 

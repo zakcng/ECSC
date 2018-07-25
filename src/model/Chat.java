@@ -2,7 +2,7 @@ package model;
 
 public class Chat {
 
-    private String chatName, chatPassword;
+    private transient String chatName, chatPassword;
     private Boolean chatLogs;
 
     public Chat(String chatName, String chatPassword, Boolean chatLogs) {
