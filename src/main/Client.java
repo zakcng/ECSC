@@ -5,6 +5,7 @@ import javax.net.ssl.SSLSocketFactory;
 import java.io.*;
 import java.net.Socket;
 import java.security.Security;
+
 import com.sun.security.sasl.Provider;
 import org.bouncycastle.jcajce.provider.digest.SHA3;
 import org.bouncycastle.util.encoders.Hex;
@@ -42,6 +43,7 @@ public class Client {
 
     /**
      * Sends request to server to create chat and receives 0 if successful or 1 if unsuccessful
+     *
      * @return request result status
      * @throws IOException
      */
@@ -56,6 +58,7 @@ public class Client {
 
     /**
      * Sends request to server to join chat and receives 0 if successful or 1 if unsuccessful
+     *
      * @return request result status
      * @throws IOException
      */
@@ -66,10 +69,17 @@ public class Client {
 
     public String hash(String stringToHash) {
 
-        SHA3.DigestSHA3 digestSHA3 = new SHA3.Digest512();
-        byte[] digest = digestSHA3.digest(stringToHash.getBytes());
+        String temp = stringToHash + salt();
 
-        return(Hex.toHexString(digest));
+        SHA3.DigestSHA3 digestSHA3 = new SHA3.Digest512();
+        byte[] digest = digestSHA3.digest(temp.getBytes());
+
+        return (Hex.toHexString(digest));
+    }
+
+    public String salt() {
+        //TODO SALT FUNCTION
+        return "";
     }
 
     public static DataOutputStream getDataOutputStream() {

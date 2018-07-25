@@ -34,4 +34,11 @@ public class Chat {
     public Boolean getChatLogs() {
         return chatLogs;
     }
+
+
+    @Override
+    public String toString() {
+        //Custom toString for displaying chat name
+        return chatName;
+    }
 }
