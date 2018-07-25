@@ -6,6 +6,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
 import main.Client;
+import main.Server;
 import model.User;
 import model.Chat;
 
@@ -129,6 +130,8 @@ public class Controller {
 				//Print selected chat name as String
 				System.out.println(lp.getSelectedChat().toString());
 
+				//client.joinChat();
+
 			}catch (Exception ex) {
 				ex.printStackTrace();
 			}
@@ -142,9 +145,13 @@ public class Controller {
 		public void handle(ActionEvent e) {
 			System.out.println("Refresh testing");
 
-			Chat c = new Chat("Test Chat","TestPass",false);
+			lp.clearChatList();
 
-			lp.addChat(c);
+			//Chat c = new Chat("Test Chat","TestPass",false);
+
+			for (String s: Server.getChats().keySet()) {
+				lp.addChat(Server.getChats().get(s));
+			}
 
 		}
 	}

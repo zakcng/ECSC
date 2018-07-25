@@ -87,6 +87,10 @@ public class LoginPane extends BorderPane {
         return lvwChats.getSelectionModel().getSelectedItem();
     }
 
+    public void clearChatList() {
+        olChats.clear();
+    }
+
     public NewChatPane getNcp() {
         return ncp;
     }
