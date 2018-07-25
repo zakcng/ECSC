@@ -49,6 +49,8 @@ public class Controller {
 		//bp.addAddHandler(new AddHandler());
 
 		lp.addJoinHandler(new JoinHandler());
+		lp.addRefreshHandler((new RefreshHandler()));
+
 		lp.getNcp().addCreateHandler(new CreateChatHandler());
 
 		//cp.addSendHandler(new HANDLER);
@@ -118,9 +120,16 @@ public class Controller {
 	private class JoinHandler implements EventHandler<ActionEvent> {
 
 		public void handle(ActionEvent e) {
-			User user = new User(lp.getNickname());
+			try {
+				User user = new User(lp.getNickname());
 
-			System.out.println("Join testing");
+				System.out.println(user.getIpAddress());
+				System.out.println(user.getNickname());
+
+			}catch (Exception ex) {
+				ex.printStackTrace();
+			}
+
 
 		}
 	}

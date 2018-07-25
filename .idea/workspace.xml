@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="254eca1d-b501-41bf-9494-7fa57541a577" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EPC.iml" beforeDir="false" afterPath="$PROJECT_DIR$/EPC.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/LoginPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LoginPane.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -19,17 +20,105 @@
       <file leaf-file-name="Client.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/Client.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="78">
-              <caret line="51" column="12" selection-start-line="51" selection-start-column="12" selection-end-line="51" selection-end-column="12" />
+            <state relative-caret-position="975">
+              <caret line="72" column="5" selection-start-line="72" selection-start-column="5" selection-end-line="72" selection-end-column="5" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
+      <file leaf-file-name="LoginPane.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/view/LoginPane.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="17" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
+            <state relative-caret-position="353">
+              <caret line="82" lean-forward="true" selection-start-line="82" selection-end-line="82" />
+              <folding>
+                <element signature="e#2183#2184#0" expanded="true" />
+                <element signature="e#2209#2210#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/controller/Controller.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="230">
+              <caret line="126" column="53" selection-start-line="126" selection-start-column="53" selection-end-line="126" selection-end-column="53" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ApplicationLoader.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/ApplicationLoader.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="48">
+              <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/model/User.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="12" column="68" selection-start-line="12" selection-start-column="68" selection-end-line="12" selection-end-column="68" />
+              <folding>
+                <element signature="e#356#357#0" expanded="true" />
+                <element signature="e#388#389#0" expanded="true" />
+                <element signature="e#441#442#0" expanded="true" />
+                <element signature="e#489#490#0" expanded="true" />
+                <element signature="e#525#526#0" expanded="true" />
+                <element signature="e#560#561#0" expanded="true" />
+                <element signature="e#607#608#0" expanded="true" />
+                <element signature="e#645#646#0" expanded="true" />
+                <element signature="e#680#681#0" expanded="true" />
+                <element signature="e#710#711#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MyMenuBar.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/view/MyMenuBar.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NewChatPane.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/view/NewChatPane.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RootPane.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/view/RootPane.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ClientThread.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/ClientThread.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Server.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/Server.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-217">
+              <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -43,6 +132,9 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/src/view/LoginPane.java" />
+        <option value="$PROJECT_DIR$/src/model/User.java" />
+        <option value="$PROJECT_DIR$/src/controller/Controller.java" />
       </list>
     </option>
   </component>
@@ -96,6 +188,18 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="EPC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EPC" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="EPC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EPC" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -132,6 +236,17 @@
     </option>
   </component>
   <component name="RunManager">
+    <configuration name="ApplicationLoader" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="main.ApplicationLoader" />
+      <module name="EPC" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+    </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
     </configuration>
@@ -173,6 +288,11 @@
       <properties />
       <listeners />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.ApplicationLoader" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -185,19 +305,28 @@
       <option name="presentableId" value="Default" />
       <updated>1532505846617</updated>
       <workItem from="1532505852233" duration="291000" />
-      <workItem from="1532506166586" duration="93000" />
+      <workItem from="1532506166586" duration="6235000" />
     </task>
+    <task id="LOCAL-00001" summary="Included Bouncy Castle jar library">
+      <created>1532506293889</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1532506293889</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="384000" />
+    <option name="totallyTimeSpent" value="6526000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="67" y="25" width="981" height="735" extended-state="6" />
+    <frame x="67" y="25" width="1853" height="950" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Messages" weight="0.3297619" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
@@ -205,12 +334,12 @@
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32857144" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24974516" />
-      <window_info anchor="bottom" id="Statistic" order="7" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13221802" />
+      <window_info anchor="bottom" id="Statistic" order="7" weight="0.3296" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -232,6 +361,10 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Included Bouncy Castle jar library" />
+    <option name="LAST_COMMIT_MESSAGE" value="Included Bouncy Castle jar library" />
+  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/main/Client.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -240,17 +373,103 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Client.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="78">
-          <caret line="51" column="12" selection-start-line="51" selection-start-column="12" selection-end-line="51" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="14" column="17" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/ChatPane.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/MyMenuBar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/NewChatPane.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/RootPane.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/LoginPane.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="353">
+          <caret line="82" lean-forward="true" selection-start-line="82" selection-end-line="82" />
+          <folding>
+            <element signature="e#2183#2184#0" expanded="true" />
+            <element signature="e#2209#2210#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Client.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="975">
+          <caret line="72" column="5" selection-start-line="72" selection-start-column="5" selection-end-line="72" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/ClientThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Server.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-217">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/ApplicationLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="68" selection-start-line="12" selection-start-column="68" selection-end-line="12" selection-end-column="68" />
+          <folding>
+            <element signature="e#356#357#0" expanded="true" />
+            <element signature="e#388#389#0" expanded="true" />
+            <element signature="e#441#442#0" expanded="true" />
+            <element signature="e#489#490#0" expanded="true" />
+            <element signature="e#525#526#0" expanded="true" />
+            <element signature="e#560#561#0" expanded="true" />
+            <element signature="e#607#608#0" expanded="true" />
+            <element signature="e#645#646#0" expanded="true" />
+            <element signature="e#680#681#0" expanded="true" />
+            <element signature="e#710#711#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="126" column="53" selection-start-line="126" selection-start-column="53" selection-end-line="126" selection-end-column="53" />
         </state>
       </provider>
     </entry>
