@@ -5,6 +5,7 @@ import javax.net.ssl.SSLSocketFactory;
 import java.io.*;
 import java.net.Socket;
 import java.security.Security;
+import java.util.ArrayList;
 
 import com.sun.security.sasl.Provider;
 import org.bouncycastle.jcajce.provider.digest.SHA3;
@@ -14,13 +15,15 @@ public class Client {
     //Default values provided if no arguments are provided during execution.
     private final String DEFAULT_IP = "127.0.0.1";
     private static final Integer DEFAULT_PORT = 10000;
-    private final int CREATE = 1;
     private final int JOIN = 0;
+    private final int CREATE = 1;
+    private final int REFRESH = 2;
     private SSLSocket sslSocket;
     private static DataOutputStream dataOutputStream;
     private static DataInputStream dataInputStream;
     private static final String DEFAULT_TRUSTSTORE = System.getProperty("user.dir") + "/data/myTrustStore.jts";
     private static final String DEFAULT_TRUSTORE_PASSWORD = "password";
+    private ArrayList<String> chatNames = new ArrayList<>();
 
     /**
      * Will try to connect to default ip address and port nuber
@@ -56,6 +59,23 @@ public class Client {
         return dataInputStream.readByte();
     }
 
+    public static ArrayList<String> loadChats(DataInputStream in) {
+        try {
+            int numChats = in.readInt();
+            ArrayList<String> names = new ArrayList<>();
+
+            for (int i = 0; i < numChats; i++) {
+                names.add(in.readUTF());
+            }
+
+            return names;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
     /**
      * Sends request to server to join chat and receives 0 if successful or 1 if unsuccessful
      *
@@ -64,6 +84,11 @@ public class Client {
      */
     public int joinChat() throws IOException {
         dataOutputStream.writeByte(JOIN);
+        return dataInputStream.readByte();
+    }
+
+    public int refreshChats() throws IOException {
+        dataOutputStream.writeByte(REFRESH);
         return dataInputStream.readByte();
     }
 
@@ -88,5 +113,13 @@ public class Client {
 
     public static DataInputStream getDataInputStream() {
         return dataInputStream;
+    }
+
+    public ArrayList<String> getChatNames() {
+        return chatNames;
+    }
+
+    public void setChatNames(ArrayList<String> chatNames) {
+        this.chatNames = chatNames;
     }
 }

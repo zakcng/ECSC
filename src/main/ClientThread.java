@@ -8,6 +8,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -15,6 +16,7 @@ import java.util.Iterator;
 public class ClientThread extends Thread {
     private static final int JOIN = 0;
     private static final int CREATE = 1;
+    private static final int REFRESH = 2;
     private static final int OK = 0;
     private static final int ERROR = 1;
     private SSLSocket sslSocket;
@@ -51,6 +53,21 @@ public class ClientThread extends Thread {
         return passwords;
     }
 
+    public static void sendChats(DataOutputStream out, HashMap<String, Chat> chats) {
+        Iterator it = chats.entrySet().iterator();
+
+        try {
+            out.writeInt(chats.size());
+
+            while (it.hasNext()) {
+                HashMap.Entry pair = (HashMap.Entry)it.next();
+                out.writeUTF(chats.get(pair.getKey()).getChatName());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
     public static boolean authenticate(String chatName, String hashedPass, HashMap<String, String> passwords) {
@@ -76,6 +93,13 @@ public class ClientThread extends Thread {
 
         } else if (request == JOIN) {
             //JOIN code goes here
+        } else if (request == REFRESH) {
+            if (Server.getChats().size() == 0) {
+                dataOutputStream.writeByte(ERROR);
+            } else {
+                dataOutputStream.writeByte(OK);
+                sendChats(dataOutputStream, Server.getChats());
+            }
         } else {
             System.out.println("Invalid request");
         }

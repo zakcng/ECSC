@@ -20,8 +20,8 @@ public class LoginPane extends BorderPane {
     private TextField txtNickname;
     private Button btnJoinChat, btnRefreshChats;
 
-    private ListView<Chat> lvwChats;
-    private ObservableList<Chat> olChats;
+    private ListView<String> lvwChats;
+    private ObservableList<String> olChats;
 
     public LoginPane() {
         olChats = FXCollections.observableArrayList();
@@ -77,13 +77,13 @@ public class LoginPane extends BorderPane {
     }
 
 
-    public void addChat(Chat c) {
+    public void addChat(String chatName) {
         //Chat to String TODO
-        olChats.add(c);
+        olChats.add(chatName);
     }
 
 
-    public Chat getSelectedChat() {
+    public String getSelectedChat() {
         return lvwChats.getSelectionModel().getSelectedItem();
     }
 

@@ -13,6 +13,9 @@ import model.Chat;
 import view.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 
 
 public class Controller {
@@ -143,15 +146,21 @@ public class Controller {
 	private class RefreshHandler implements EventHandler<ActionEvent> {
 
 		public void handle(ActionEvent e) {
-			System.out.println("Refresh testing");
+			try {
+				if (client.refreshChats() == OK) {
+					client.setChatNames(client.loadChats(client.getDataInputStream()));
+					lp.clearChatList();
 
-			lp.clearChatList();
+					for (String chat: client.getChatNames()) {
+						lp.addChat(chat);
+					}
+				} else {
+					System.out.println("Couldn't get chats from server.");
+				}
+			} catch (IOException E) {
+				E.printStackTrace();
+			};
 
-			//Chat c = new Chat("Test Chat","TestPass",false);
-
-			for (String s: Server.getChats().keySet()) {
-				lp.addChat(Server.getChats().get(s));
-			}
 
 		}
 	}
