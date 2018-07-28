@@ -30,6 +30,7 @@ public class ClientThread extends Thread {
         try {
             DataInputStream dataInputStream = new DataInputStream(sslSocket.getInputStream());
             DataOutputStream dataOutputStream = new DataOutputStream(sslSocket.getOutputStream());
+            PasswordManager passwordManager = new PasswordManager();
 
             while (true) {
                 //Handles initial client request to join or create chat:
