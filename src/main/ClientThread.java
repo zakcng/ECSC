@@ -28,8 +28,6 @@ public class ClientThread extends Thread {
     public void run() {
 
         try {
-            System.out.println("Hello, World!");
-
             DataInputStream dataInputStream = new DataInputStream(sslSocket.getInputStream());
             DataOutputStream dataOutputStream = new DataOutputStream(sslSocket.getOutputStream());
 
