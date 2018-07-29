@@ -136,7 +136,8 @@ public class Controller {
 				//Print selected chat name as String
 				System.out.println(lp.getSelectedChat().toString());
 
-				//client.joinChat();
+				int response = client.joinChat(lp.getSelectedChat(), "Password", user);
+
 
 			}catch (Exception ex) {
 				ex.printStackTrace();
@@ -175,8 +176,8 @@ public class Controller {
 		}
 	}*/
 
-	private void createChat(String chatName, String chatPassword, Boolean chatLog) {
-		Chat chat = new Chat(chatName, chatPassword, chatLog);
+	private void createChat(String chatName, String chatPassword, Boolean chatLog, Boolean passwordEnabled) {
+		Chat chat = new Chat(chatName, chatPassword, chatLog, passwordEnabled);
 	}
 
 	private void appendTextArea(String line) {

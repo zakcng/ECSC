@@ -36,7 +36,7 @@ public class User {
         this.blocked = blocked;
     }
 
-    public Boolean getBlocked() {
+    public Boolean blocked() {
         return blocked;
     }
 
@@ -47,4 +47,6 @@ public class User {
     public String getNickname() {
         return nickname;
     }
+
+
 }

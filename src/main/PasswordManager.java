@@ -29,6 +29,11 @@ public class PasswordManager {
     //    System.loadLibrary("PasswordManager");
     //}
 
+    //TODO - prompt server admin for file password
+    //TODO - read in encrypted file and decrypt
+    //TODO - append new chat to csv list of chats and salts
+    //TODO - encrypt file and write back
+
     static void processFile(int cipherMode,String key,File inputFile,File outputFile){
         try {
             Key secretKey = new SecretKeySpec(key.getBytes(), "AES");
@@ -53,7 +58,7 @@ public class PasswordManager {
             e.printStackTrace();
         }
     }
-    
+
 
     public static void test() {
         String key = "This is a secret";
