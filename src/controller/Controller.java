@@ -21,6 +21,7 @@ import java.util.Iterator;
 public class Controller {
 
 	//fields to be used throughout the class
+	private RootPane view;
 	private MyMenuBar mmb;
 	private LoginPane lp;
 	private NewChatPane ncp;
@@ -35,6 +36,7 @@ public class Controller {
 	public Controller(RootPane view) {
 		//initialise model and view fields
 		this.client = new Client();
+		this.view = view;
 
 		mmb = view.getMenuBar();
 		ncp = view.getNcp();
@@ -139,6 +141,11 @@ public class Controller {
 				int response = client.joinChat(lp.getSelectedChat(), "Password", user);
 
 
+				if (response == OK) {
+view.changeTab(1);
+				}
+
+
 			}catch (Exception ex) {
 				ex.printStackTrace();
 			}
@@ -193,5 +200,4 @@ public class Controller {
 		alert.setContentText(content);
 		alert.showAndWait();
 	}
-
 }
