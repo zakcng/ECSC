@@ -106,7 +106,7 @@ public class Client {
 
     public String hash(String stringToHash) {
 
-        salt();
+        //salt();
 
         String temp = stringToHash; //+ salt();
 
@@ -118,8 +118,8 @@ public class Client {
 
     public String salt() {
         //TODO SALT FUNCTION
-        System.out.println("Salt:");
-        System.out.println(salt().getBytes(StandardCharsets.UTF_8));
+       // System.out.println("Salt:");
+       // System.out.println(salt().getBytes(StandardCharsets.UTF_8));
         //System.out.println("Salt:" + salt().getBytes(StandardCharsets.UTF_8));
 
         return " ";
