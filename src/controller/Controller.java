@@ -20,86 +20,86 @@ import java.util.Iterator;
 
 public class Controller {
 
-	//fields to be used throughout the class
-	private RootPane view;
-	private MyMenuBar mmb;
-	private LoginPane lp;
-	private NewChatPane ncp;
-	private ChatPane cp;
-	private Client client;
-	private final int OK = 0;
-	private final int ERROR = 1;
+    //fields to be used throughout the class
+    private RootPane view;
+    private MyMenuBar mmb;
+    private LoginPane lp;
+    private NewChatPane ncp;
+    private ChatPane cp;
+    private Client client;
+    private final int OK = 0;
+    private final int ERROR = 1;
 
-	//transient fields
-	private transient String hashedPass = null;
+    //transient fields
+    private transient String hashedPass = null;
 
-	public Controller(RootPane view) {
-		//initialise model and view fields
-		this.client = new Client();
-		this.view = view;
+    public Controller(RootPane view) {
+        //initialise model and view fields
+        this.client = new Client();
+        this.view = view;
 
-		mmb = view.getMenuBar();
-		ncp = view.getNcp();
-		lp = view.getLoginPane();
-		cp = view.getCp();
+        mmb = view.getMenuBar();
+        ncp = view.getNcp();
+        lp = view.getLoginPane();
+        cp = view.getCp();
 
-		//attach event handlers to view using private helper method
-		this.attachEventHandlers();
+        //attach event handlers to view using private helper method
+        this.attachEventHandlers();
 
-		//attach bindings within view using private helper method
-		this.attachBindings();
-	}
+        //attach bindings within view using private helper method
+        this.attachBindings();
+    }
 
-	private void attachEventHandlers() {
-		//attaching event handlers
-		//bp.addAddHandler(new AddHandler());
+    private void attachEventHandlers() {
+        //attaching event handlers
+        //bp.addAddHandler(new AddHandler());
 
-		lp.addJoinHandler(new JoinHandler());
-		lp.addRefreshHandler((new RefreshHandler()));
+        lp.addJoinHandler(new JoinHandler());
+        lp.addRefreshHandler((new RefreshHandler()));
 
-		lp.getNcp().addCreateHandler(new CreateChatHandler());
+        lp.getNcp().addCreateHandler(new CreateChatHandler());
 
-		//cp.addSendHandler(new HANDLER);
+        //cp.addSendHandler(new HANDLER);
 
-		mmb.addExitHandler(e -> System.exit(0));
-		mmb.addAboutHandler(e -> this.alertDialogBuilder(AlertType.INFORMATION, "Information Dialog", null, "EPC v1.0" +  System.lineSeparator() + System.lineSeparator() + "Zak Ng" + System.lineSeparator() + "Lewys Ward"));
-	}
+        mmb.addExitHandler(e -> System.exit(0));
+        mmb.addAboutHandler(e -> this.alertDialogBuilder(AlertType.INFORMATION, "Information Dialog", null, "EPC v1.0" + System.lineSeparator() + System.lineSeparator() + "Zak Ng" + System.lineSeparator() + "Lewys Ward"));
+    }
 
-	/* this method attaches bindings in the view, e.g. for validation, and to the model to ensure synchronisation between the data model and view */
-	private void attachBindings() {
-		//attaches a binding such that the add button in the view will be disabled whenever either of the text fields in the NamePane are empty
-		//bp.addBtnDisableBind(np.isEitherFieldEmpty());
+    /* this method attaches bindings in the view, e.g. for validation, and to the model to ensure synchronisation between the data model and view */
+    private void attachBindings() {
+        //attaches a binding such that the add button in the view will be disabled whenever either of the text fields in the NamePane are empty
+        //bp.addBtnDisableBind(np.isEitherFieldEmpty());
 
-	}
+    }
 
-	/**
-	 * Client code goes to server when handled in this class
-	 */
-	private class CreateChatHandler implements EventHandler<ActionEvent> {
+    /**
+     * Client code goes to server when handled in this class
+     */
+    private class CreateChatHandler implements EventHandler<ActionEvent> {
 
-		public void handle(ActionEvent e) {
-			System.out.println("Hello");
-			String name = lp.getNcp().getTxtName();
-			hashedPass = client.hash(lp.getNcp().getTxtChatPassword());
+        public void handle(ActionEvent e) {
+            System.out.println("Hello");
+            String name = lp.getNcp().getTxtName();
+            hashedPass = client.hash(lp.getNcp().getTxtChatPassword());
 
-			System.out.println(hashedPass);
+            System.out.println(hashedPass);
 
-			Boolean passEnabled = lp.getNcp().getCbChatPassChecked().isSelected();
-			Boolean logEnabled = lp.getNcp().getCbChatLogChecked().isSelected();
+            Boolean passEnabled = lp.getNcp().getCbChatPassChecked().isSelected();
+            Boolean logEnabled = lp.getNcp().getCbChatLogChecked().isSelected();
 
-			try {
-				int response = -1;
+            try {
+                int response = -1;
 
-				response = client.createChat(name, hashedPass, passEnabled, logEnabled);
+                response = client.createChat(name, hashedPass, passEnabled, logEnabled);
 
-				if (response == ERROR) {
-					System.out.println("Error, server could not create chat.");
-					System.out.println("Ensure a unique server name and non blank password if enabled.");
-				}
+                if (response == ERROR) {
+                    System.out.println("Error, server could not create chat.");
+                    System.out.println("Ensure a unique server name and non blank password if enabled.");
+                }
 
-			} catch (IOException E) {
-				E.printStackTrace();
-			}
+            } catch (IOException E) {
+                E.printStackTrace();
+            }
 
 			/*
 			System.out.println("Chat room name:");
@@ -120,61 +120,60 @@ public class Controller {
 			} else
 			createChat(lp.getNcp().getTxtName(),lp.getNcp().getTxtChatPassword(),lp.getNcp().getCbChatLogChecked().isSelected());
 			*/
-		}
-	}
+        }
+    }
 
 
+    private class JoinHandler implements EventHandler<ActionEvent> {
+
+        public void handle(ActionEvent e) {
+            try {
+                User user = new User(lp.getNickname());
+
+                System.out.println(user.getIpAddress());
+                System.out.println(user.getNickname());
+
+                //Print selected chat name as String
+                System.out.println(lp.getSelectedChat().toString());
+
+                int response = client.joinChat(lp.getSelectedChat(), "Password", user);
 
 
-	private class JoinHandler implements EventHandler<ActionEvent> {
-
-		public void handle(ActionEvent e) {
-			try {
-				User user = new User(lp.getNickname());
-
-				System.out.println(user.getIpAddress());
-				System.out.println(user.getNickname());
-
-				//Print selected chat name as String
-				System.out.println(lp.getSelectedChat().toString());
-
-				int response = client.joinChat(lp.getSelectedChat(), "Password", user);
+                if (response == OK) {
+                    view.changeTab(2);
+                }
 
 
-				if (response == OK) {
-view.changeTab(1);
-				}
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
 
 
-			}catch (Exception ex) {
-				ex.printStackTrace();
-			}
+        }
+    }
+
+    private class RefreshHandler implements EventHandler<ActionEvent> {
+
+        public void handle(ActionEvent e) {
+            try {
+                if (client.refreshChats() == OK) {
+                    client.setChatNames(client.loadChats(client.getDataInputStream()));
+                    lp.clearChatList();
+
+                    for (String chat : client.getChatNames()) {
+                        lp.addChat(chat);
+                    }
+                } else {
+                    System.out.println("Couldn't get chats from server.");
+                }
+            } catch (IOException E) {
+                E.printStackTrace();
+            }
+            ;
 
 
-		}
-	}
-
-	private class RefreshHandler implements EventHandler<ActionEvent> {
-
-		public void handle(ActionEvent e) {
-			try {
-				if (client.refreshChats() == OK) {
-					client.setChatNames(client.loadChats(client.getDataInputStream()));
-					lp.clearChatList();
-
-					for (String chat: client.getChatNames()) {
-						lp.addChat(chat);
-					}
-				} else {
-					System.out.println("Couldn't get chats from server.");
-				}
-			} catch (IOException E) {
-				E.printStackTrace();
-			};
-
-
-		}
-	}
+        }
+    }
 	/*
 	private class AddHandler implements EventHandler<ActionEvent> {
 
@@ -183,21 +182,21 @@ view.changeTab(1);
 		}
 	}*/
 
-	private void createChat(String chatName, String chatPassword, Boolean chatLog, Boolean passwordEnabled) {
-		Chat chat = new Chat(chatName, chatPassword, chatLog, passwordEnabled);
-	}
+    private void createChat(String chatName, String chatPassword, Boolean chatLog, Boolean passwordEnabled) {
+        Chat chat = new Chat(chatName, chatPassword, chatLog, passwordEnabled);
+    }
 
-	private void appendTextArea(String line) {
-		cp.appendLineToTxtMessages(line);
-	}
+    private void appendTextArea(String line) {
+        cp.appendLineToTxtMessages(line);
+    }
 
 
-	//helper method to build dialogs
-	private void alertDialogBuilder(AlertType type, String title, String header, String content) {
-		Alert alert = new Alert(type);
-		alert.setTitle(title);
-		alert.setHeaderText(header);
-		alert.setContentText(content);
-		alert.showAndWait();
-	}
+    //helper method to build dialogs
+    private void alertDialogBuilder(AlertType type, String title, String header, String content) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
 }
