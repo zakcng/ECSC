@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.net.InetAddress;
 
-public class User {
+public class User implements Serializable {
     private String nickname;
     private String ipAddress;
     private int passAttempts;
