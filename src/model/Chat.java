@@ -6,7 +6,7 @@ public class Chat {
 
     private transient String chatName, chatPassword;
     private Boolean chatLogs, passEnabled;
-    private ArrayList<User> users;
+    private ArrayList<User> users = new ArrayList<>();
 
     public Chat(String chatName, String chatPassword, Boolean chatLogs, Boolean passEnabled) {
         this.chatName = chatName;
