@@ -79,6 +79,9 @@ public class Controller {
 			System.out.println("Hello");
 			String name = lp.getNcp().getTxtName();
 			hashedPass = client.hash(lp.getNcp().getTxtChatPassword());
+
+			System.out.println(hashedPass);
+
 			Boolean passEnabled = lp.getNcp().getCbChatPassChecked().isSelected();
 			Boolean logEnabled = lp.getNcp().getCbChatLogChecked().isSelected();
 

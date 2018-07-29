@@ -11,6 +11,12 @@ import com.sun.security.sasl.Provider;
 import org.bouncycastle.jcajce.provider.digest.SHA3;
 import org.bouncycastle.util.encoders.Hex;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+
+
 public class Client {
     //Default values provided if no arguments are provided during execution.
     private final String DEFAULT_IP = "127.0.0.1";
@@ -94,7 +100,9 @@ public class Client {
 
     public String hash(String stringToHash) {
 
-        String temp = stringToHash + salt();
+        salt();
+
+        String temp = stringToHash; //+ salt();
 
         SHA3.DigestSHA3 digestSHA3 = new SHA3.Digest512();
         byte[] digest = digestSHA3.digest(temp.getBytes());
@@ -104,7 +112,11 @@ public class Client {
 
     public String salt() {
         //TODO SALT FUNCTION
-        return "";
+        System.out.println("Salt:");
+        System.out.println(salt().getBytes(StandardCharsets.UTF_8));
+        //System.out.println("Salt:" + salt().getBytes(StandardCharsets.UTF_8));
+
+        return " ";
     }
 
     public static DataOutputStream getDataOutputStream() {
