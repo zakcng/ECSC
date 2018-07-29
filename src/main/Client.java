@@ -8,6 +8,7 @@ import java.security.Security;
 import java.util.ArrayList;
 
 import com.sun.security.sasl.Provider;
+import model.User;
 import org.bouncycastle.jcajce.provider.digest.SHA3;
 import org.bouncycastle.util.encoders.Hex;
 
@@ -21,6 +22,7 @@ public class Client {
     private SSLSocket sslSocket;
     private static DataOutputStream dataOutputStream;
     private static DataInputStream dataInputStream;
+    private static ObjectOutputStream objectOutputStream;
     private static final String DEFAULT_TRUSTSTORE = System.getProperty("user.dir") + "/data/myTrustStore.jts";
     private static final String DEFAULT_TRUSTORE_PASSWORD = "password";
     private ArrayList<String> chatNames = new ArrayList<>();
@@ -38,6 +40,7 @@ public class Client {
             this.sslSocket = (SSLSocket) sslSocketFactory.createSocket(DEFAULT_IP, DEFAULT_PORT);
             dataInputStream = new DataInputStream(sslSocket.getInputStream());
             dataOutputStream = new DataOutputStream(sslSocket.getOutputStream());
+            objectOutputStream = new ObjectOutputStream(sslSocket.getOutputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -82,8 +85,11 @@ public class Client {
      * @return request result status
      * @throws IOException
      */
-    public int joinChat() throws IOException {
+    public int joinChat(String chatName, String hashedPass, User user) throws IOException {
         dataOutputStream.writeByte(JOIN);
+        dataOutputStream.writeUTF(chatName);
+        dataOutputStream.writeUTF("password"); //TODO replace password with hashedPass
+        objectOutputStream.writeObject(user);
         return dataInputStream.readByte();
     }
 

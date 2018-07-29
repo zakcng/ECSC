@@ -1,11 +1,10 @@
 package main;
 
 import model.Chat;
+import model.User;
 
 import javax.net.ssl.SSLSocket;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -30,12 +29,12 @@ public class ClientThread extends Thread {
         try {
             DataInputStream dataInputStream = new DataInputStream(sslSocket.getInputStream());
             DataOutputStream dataOutputStream = new DataOutputStream(sslSocket.getOutputStream());
-            PasswordManager passwordManager = new PasswordManager();
+            ObjectInputStream objectInputStream = new ObjectInputStream(sslSocket.getInputStream());
 
             while (true) {
                 //Handles initial client request to join or create chat:
                 int clientRequest = dataInputStream.readByte();
-                handleRequest(clientRequest, dataInputStream, dataOutputStream, Server.getChats());
+                handleRequest(clientRequest, dataInputStream, dataOutputStream, objectInputStream, Server.getChats());
 
                 printChats(Server.getChats());
 
@@ -73,7 +72,8 @@ public class ClientThread extends Thread {
         return (hashedPass.equals(passwords.get(chatName)));
     }
 
-    public static void handleRequest(int request, DataInputStream dataInputStream, DataOutputStream dataOutputStream, HashMap<String, Chat> chats) throws IOException {
+    public static void handleRequest(int request, DataInputStream dataInputStream, DataOutputStream dataOutputStream,
+                                     ObjectInputStream objectInputStream, HashMap<String, Chat> chats) throws IOException {
         if (request == CREATE) {
             String chatName = dataInputStream.readUTF();
             String hashedPass = dataInputStream.readUTF();
@@ -83,7 +83,7 @@ public class ClientThread extends Thread {
             //TODO add regex for password to ensure security
             if (validChat(passEnabled, hashedPass, chatName) && !chatExists(chatName, chats)) {
                 hashedPass = passEnabled ? hashedPass : null;
-                Chat chat = new Chat(chatName, hashedPass, logEnabled);
+                Chat chat = new Chat(chatName, hashedPass, logEnabled, passEnabled);
                 chats.put(chatName, chat);
                 dataOutputStream.writeByte(OK);
             } else {
@@ -91,7 +91,21 @@ public class ClientThread extends Thread {
             }
 
         } else if (request == JOIN) {
-            //JOIN code goes here
+            try {
+                String chatName = dataInputStream.readUTF();
+                String hashedPass = dataInputStream.readUTF();
+                User user = (User) objectInputStream.readObject();
+                Chat chat = Server.getChats().get(chatName);
+
+                if (!chat.getPassEnabled() || (hashedPass.equals(chat.getChatPassword()) && !user.blocked())) {
+                    chat.getUsers().add(user);
+                    dataOutputStream.writeByte(OK);
+                } else {
+                    dataOutputStream.writeByte(ERROR);
+                }
+            } catch(ClassNotFoundException e) {
+                dataOutputStream.writeByte(ERROR);
+            }
         } else if (request == REFRESH) {
             if (Server.getChats().size() == 0) {
                 dataOutputStream.writeByte(ERROR);

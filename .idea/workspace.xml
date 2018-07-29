@@ -2,22 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="254eca1d-b501-41bf-9494-7fa57541a577" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/PasswordManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/EPC/C_Files/HelloWorld.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/EPC/C_Files/HelloWorld.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/EPC/C_Files/Makefile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/EPC/C_Files/libHelloWorld.so" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/EPC/C_Files/main_HelloWorld.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/EPC/main/HelloWorld.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/EPC/main/libHelloWorld.so" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/EPC/main/main_HelloWorld.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/C_Files/HelloWorld.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/C_Files/HelloWorld.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/C_Files/Makefile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/C_Files/libHelloWorld.so" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/C_Files/main_HelloWorld.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/ClientThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/ClientThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/PasswordManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/PasswordManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Chat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Chat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/User.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -37,29 +28,11 @@
       <file leaf-file-name="Client.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/Client.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="19" column="34" selection-start-line="19" selection-start-column="34" selection-end-line="19" selection-end-column="34" />
+            <state relative-caret-position="495">
+              <caret line="90" column="86" selection-start-line="90" selection-start-column="86" selection-end-line="90" selection-end-column="86" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/controller/Controller.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2040">
-              <caret line="151" column="39" selection-start-line="151" selection-start-column="39" selection-end-line="151" selection-end-column="39" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LoginPane.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/view/LoginPane.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="825">
-              <caret line="69" selection-start-line="69" selection-end-line="69" />
             </state>
           </provider>
         </entry>
@@ -67,28 +40,21 @@
       <file leaf-file-name="ClientThread.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/ClientThread.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-375">
-              <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
+            <state relative-caret-position="327">
+              <caret line="95" column="62" lean-forward="true" selection-start-line="95" selection-start-column="62" selection-end-line="95" selection-end-column="62" />
+              <folding>
+                <element signature="e#3904#3905#0" expanded="true" />
+                <element signature="e#3950#3951#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PasswordManager.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/PasswordManager.java">
+      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/controller/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="55" column="4" selection-start-line="55" selection-start-column="4" selection-end-line="55" selection-end-column="4" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#2712#2713#0" expanded="true" />
-                <element signature="e#2736#2737#0" expanded="true" />
-                <element signature="e#2767#2768#0" expanded="true" />
-                <element signature="e#2791#2792#0" expanded="true" />
-                <element signature="e#2821#2822#0" expanded="true" />
-                <element signature="e#2845#2846#0" expanded="true" />
-                <element signature="e#2876#2877#0" expanded="true" />
-                <element signature="e#2905#2906#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="360">
+              <caret line="135" column="31" selection-start-line="135" selection-start-column="31" selection-end-line="135" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -96,21 +62,17 @@
       <file leaf-file-name="Chat.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/Chat.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="21" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
+            <state relative-caret-position="435">
+              <caret line="41" column="59" lean-forward="true" selection-start-line="41" selection-start-column="59" selection-end-line="41" selection-end-column="59" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HelloWorld.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/HelloWorld.java">
+      <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/model/User.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
-              <folding>
-                <element signature="e#173#174#0" expanded="true" />
-                <element signature="e#213#214#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="540">
+              <caret line="50" selection-start-line="50" selection-end-line="50" />
             </state>
           </provider>
         </entry>
@@ -151,16 +113,16 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/src/model/User.java" />
-        <option value="$PROJECT_DIR$/src/model/Chat.java" />
         <option value="$PROJECT_DIR$/src/main/ApplicationLoader.java" />
         <option value="$PROJECT_DIR$/src/view/LoginPane.java" />
-        <option value="$PROJECT_DIR$/src/controller/Controller.java" />
-        <option value="$PROJECT_DIR$/src/main/Client.java" />
         <option value="$PROJECT_DIR$/src/main/HelloWorld.java" />
         <option value="$PROJECT_DIR$/out/production/EPC/main/PasswordManager.java" />
-        <option value="$PROJECT_DIR$/src/main/ClientThread.java" />
         <option value="$PROJECT_DIR$/src/main/PasswordManager.java" />
+        <option value="$PROJECT_DIR$/src/model/Chat.java" />
+        <option value="$PROJECT_DIR$/src/model/User.java" />
+        <option value="$PROJECT_DIR$/src/main/ClientThread.java" />
+        <option value="$PROJECT_DIR$/src/main/Client.java" />
+        <option value="$PROJECT_DIR$/src/controller/Controller.java" />
       </list>
     </option>
   </component>
@@ -184,6 +146,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -230,8 +194,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="AndroidView" />
     </panes>
   </component>
@@ -371,7 +333,8 @@
       <workItem from="1532530200406" duration="791000" />
       <workItem from="1532630474369" duration="5915000" />
       <workItem from="1532764896007" duration="10684000" />
-      <workItem from="1532784979484" duration="8047000" />
+      <workItem from="1532784979484" duration="8972000" />
+      <workItem from="1532866598682" duration="6697000" />
     </task>
     <task id="LOCAL-00001" summary="Included Bouncy Castle jar library">
       <created>1532506293889</created>
@@ -412,7 +375,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35990000" />
+    <option name="totallyTimeSpent" value="43612000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="0" width="1922" height="1053" extended-state="6" />
@@ -428,11 +391,11 @@
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.2968421" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.2968421" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13177083" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13177083" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -743,27 +706,10 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/Model.java" />
-    <entry file="file://$PROJECT_DIR$/src/model/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="45" selection-start-line="45" selection-end-line="45" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/ApplicationLoader.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="19" column="8" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Client.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="19" column="34" selection-start-line="19" selection-start-column="34" selection-end-line="19" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -774,15 +720,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/Controller.java">
+    <entry file="file://$PROJECT_DIR$/src/C_Files/main_HelloWorld.h" />
+    <entry file="file://$PROJECT_DIR$/out/production/EPC/main/HelloWorld.c" />
+    <entry file="file://$PROJECT_DIR$/out/production/EPC/main/PasswordManager.java" />
+    <entry file="file://$PROJECT_DIR$/src/view/LoginPane.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2040">
-          <caret line="151" column="39" selection-start-line="151" selection-start-column="39" selection-end-line="151" selection-end-column="39" />
+        <state relative-caret-position="825">
+          <caret line="69" selection-start-line="69" selection-end-line="69" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/C_Files/main_HelloWorld.h">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/src/main/PasswordManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="372">
+          <caret line="34" column="40" selection-start-line="34" selection-start-column="40" selection-end-line="34" selection-end-column="40" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/HelloWorld.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+          <folding>
+            <element signature="e#173#174#0" expanded="true" />
+            <element signature="e#213#214#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/Server.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -796,63 +763,45 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/out/production/EPC/main/HelloWorld.c">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/out/production/EPC/main/PasswordManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="13" selection-start-column="13" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/HelloWorld.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
-          <folding>
-            <element signature="e#173#174#0" expanded="true" />
-            <element signature="e#213#214#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/LoginPane.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="825">
-          <caret line="69" selection-start-line="69" selection-end-line="69" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/model/Chat.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="21" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
+        <state relative-caret-position="435">
+          <caret line="41" column="59" lean-forward="true" selection-start-line="41" selection-start-column="59" selection-end-line="41" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="50" selection-start-line="50" selection-end-line="50" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/ClientThread.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-375">
-          <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
+        <state relative-caret-position="327">
+          <caret line="95" column="62" lean-forward="true" selection-start-line="95" selection-start-column="62" selection-end-line="95" selection-end-column="62" />
+          <folding>
+            <element signature="e#3904#3905#0" expanded="true" />
+            <element signature="e#3950#3951#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/PasswordManager.java">
+    <entry file="file://$PROJECT_DIR$/src/main/Client.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="55" column="4" selection-start-line="55" selection-start-column="4" selection-end-line="55" selection-end-column="4" />
+        <state relative-caret-position="495">
+          <caret line="90" column="86" selection-start-line="90" selection-start-column="86" selection-end-line="90" selection-end-column="86" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2712#2713#0" expanded="true" />
-            <element signature="e#2736#2737#0" expanded="true" />
-            <element signature="e#2767#2768#0" expanded="true" />
-            <element signature="e#2791#2792#0" expanded="true" />
-            <element signature="e#2821#2822#0" expanded="true" />
-            <element signature="e#2845#2846#0" expanded="true" />
-            <element signature="e#2876#2877#0" expanded="true" />
-            <element signature="e#2905#2906#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="135" column="31" selection-start-line="135" selection-start-column="31" selection-end-line="135" selection-end-column="31" />
         </state>
       </provider>
     </entry>
