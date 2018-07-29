@@ -66,12 +66,6 @@ public class ClientThread extends Thread {
         }
     }
 
-
-
-    public static boolean authenticate(String chatName, String hashedPass, HashMap<String, String> passwords) {
-        return (hashedPass.equals(passwords.get(chatName)));
-    }
-
     public static void handleRequest(int request, DataInputStream dataInputStream, DataOutputStream dataOutputStream,
                                      ObjectInputStream objectInputStream, HashMap<String, Chat> chats) throws IOException {
         if (request == CREATE) {
@@ -96,6 +90,8 @@ public class ClientThread extends Thread {
                 String hashedPass = dataInputStream.readUTF();
                 User user = (User) objectInputStream.readObject();
                 Chat chat = Server.getChats().get(chatName);
+
+                System.out.println("Hashed Pass: " + hashedPass + ", chat.getChatPassword(): " + chat.getChatPassword());
 
                 if (!chat.getPassEnabled() || (hashedPass.equals(chat.getChatPassword()) && !user.blocked())) {
                     chat.getUsers().add(user);

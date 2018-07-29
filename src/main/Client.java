@@ -94,7 +94,7 @@ public class Client {
     public int joinChat(String chatName, String hashedPass, User user) throws IOException {
         dataOutputStream.writeByte(JOIN);
         dataOutputStream.writeUTF(chatName);
-        dataOutputStream.writeUTF("password"); //TODO replace password with hashedPass
+        dataOutputStream.writeUTF(hashedPass); //TODO replace password with hashedPass
         objectOutputStream.writeObject(user);
         return dataInputStream.readByte();
     }

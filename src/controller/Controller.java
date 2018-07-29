@@ -136,10 +136,11 @@ public class Controller {
                 //Print selected chat name as String
                 System.out.println(lp.getSelectedChat().toString());
 
-                int response = client.joinChat(lp.getSelectedChat(), "Password", user);
+                int response = client.joinChat(lp.getSelectedChat(), client.hash("password"), user);
 
 
                 if (response == OK) {
+					System.out.println("Cockman");
                     view.changeTab(2);
                 }
 
