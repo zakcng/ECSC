@@ -140,11 +140,14 @@ public class Controller {
                 //Print selected chat name as String
                 System.out.println(lp.getSelectedChat().toString());
 
-                int response = client.joinChat(lp.getSelectedChat(), client.hash("password"), user);
+                //Retrieve password from user
+                String password = passwordDialog();
+
+                int response = client.joinChat(lp.getSelectedChat(), client.hash(password), user);
 
 
                 if (response == OK) {
-					System.out.println("Cockman");
+					//Change tab on OK status
                     view.changeTab(1);
                 }
 
@@ -214,8 +217,6 @@ public class Controller {
         if (result.isPresent()){
             temp =  result.get();
         }
-
-        System.out.println(temp);
 
         return temp;
     }
