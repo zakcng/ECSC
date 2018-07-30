@@ -155,15 +155,6 @@ public class Controller {
         }
     }
 
-
-	private class TestHandler implements EventHandler<ActionEvent> {
-
-		public void handle(ActionEvent e) {
-			System.out.println("Testing");
-			view.changeTab(1);
-		}
-	}
-
     private class RefreshHandler implements EventHandler<ActionEvent> {
 
         public void handle(ActionEvent e) {
@@ -182,9 +173,23 @@ public class Controller {
             } catch (IOException E) {
                 E.printStackTrace();
             }
-            ;
+        }
+    }
+
+    private class SendHandler implements EventHandler<ActionEvent> {
+
+        public void handle(ActionEvent e) {
+           //Send Chat Button Handler
+            
+        }
+    }
 
 
+    private class TestHandler implements EventHandler<ActionEvent> {
+
+        public void handle(ActionEvent e) {
+            System.out.println("Testing");
+            view.changeTab(1);
         }
     }
 
