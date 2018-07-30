@@ -143,7 +143,7 @@ public class Controller {
 
                 if (response == OK) {
 					System.out.println("Cockman");
-                    view.changeTab(2);
+                    view.changeTab(1);
                 }
 
 
