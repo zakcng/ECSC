@@ -5,6 +5,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
+import javafx.scene.control.TextInputDialog;
 import main.Client;
 import main.Server;
 import model.User;
@@ -16,6 +17,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Optional;
 
 
 public class Controller {
@@ -180,7 +182,7 @@ public class Controller {
 
         public void handle(ActionEvent e) {
            //Send Chat Button Handler
-            
+
         }
     }
 
@@ -189,7 +191,7 @@ public class Controller {
 
         public void handle(ActionEvent e) {
             System.out.println("Testing");
-            view.changeTab(1);
+            passwordDialog();
         }
     }
 
@@ -201,6 +203,22 @@ public class Controller {
 			//CODE
 		}
 	}*/
+
+	private String passwordDialog() {
+	    String temp = "";
+        TextInputDialog passwordDialog = new TextInputDialog();
+        passwordDialog.setHeaderText("");
+        passwordDialog.setContentText("Please enter the chat password:");
+
+        Optional<String> result = passwordDialog.showAndWait();
+        if (result.isPresent()){
+            temp =  result.get();
+        }
+
+        System.out.println(temp);
+
+        return temp;
+    }
 
     private void createChat(String chatName, String chatPassword, Boolean chatLog, Boolean passwordEnabled) {
         Chat chat = new Chat(chatName, chatPassword, chatLog, passwordEnabled);
