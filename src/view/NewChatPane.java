@@ -17,7 +17,7 @@ public class NewChatPane extends BorderPane{
     private TextField txtName;
     private PasswordField txtChatPassword;
     private CheckBox cbChatPassChecked, cbChatLogChecked;
-    private Button btnCreate;
+    private Button btnCreate, btnTest;
     private GridPane gp;
 
     public NewChatPane() {
@@ -35,6 +35,7 @@ public class NewChatPane extends BorderPane{
         cbChatLogChecked = new CheckBox("Chat Logs");
 
         btnCreate = new Button("New Chat");
+        btnTest = new Button("Test");
 
         gp.add(txtName,0,0);
 
@@ -44,6 +45,8 @@ public class NewChatPane extends BorderPane{
         gp.add(cbChatLogChecked,0,2);
 
         gp.add(btnCreate,0,3);
+
+        gp.add(btnTest,0,4);
 
         this.setCenter(gp);
 
@@ -68,5 +71,10 @@ public class NewChatPane extends BorderPane{
     public void addCreateHandler(EventHandler<ActionEvent> handler) {
         btnCreate.setOnAction(handler);
     }
+
+    public void addTestHandler(EventHandler<ActionEvent> handler) {
+        btnTest.setOnAction(handler);
+    }
+
 
 }

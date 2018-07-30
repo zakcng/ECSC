@@ -59,6 +59,8 @@ public class Controller {
 
         lp.getNcp().addCreateHandler(new CreateChatHandler());
 
+        lp.getNcp().addTestHandler(new TestHandler());
+
         //cp.addSendHandler(new HANDLER);
 
         mmb.addExitHandler(e -> System.exit(0));
@@ -153,9 +155,19 @@ public class Controller {
         }
     }
 
+
+	private class TestHandler implements EventHandler<ActionEvent> {
+
+		public void handle(ActionEvent e) {
+			System.out.println("Testing");
+			view.changeTab(1);
+		}
+	}
+
     private class RefreshHandler implements EventHandler<ActionEvent> {
 
         public void handle(ActionEvent e) {
+            view.changeTab(2);
             try {
                 if (client.refreshChats() == OK) {
                     client.setChatNames(client.loadChats(client.getDataInputStream()));
@@ -175,6 +187,8 @@ public class Controller {
 
         }
     }
+
+
 	/*
 	private class AddHandler implements EventHandler<ActionEvent> {
 
