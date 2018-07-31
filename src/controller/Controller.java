@@ -184,7 +184,21 @@ public class Controller {
     private class SendHandler implements EventHandler<ActionEvent> {
 
         public void handle(ActionEvent e) {
-           //Send Chat Button Handler
+            try {
+                String msg = cp.getTxtMessage();
+                int attempts = 0;
+                int response = ERROR;
+
+                do {
+                   response = client.sendMsg(msg);
+                   attempts++;
+                } while (response == ERROR && attempts < 3);
+
+
+            } catch (IOException E) {
+                E.printStackTrace();
+            }
+            //Send Chat Button Handler
 
         }
     }

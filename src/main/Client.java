@@ -25,6 +25,7 @@ public class Client {
     private final int JOIN = 0;
     private final int CREATE = 1;
     private final int REFRESH = 2;
+    private final int SEND = 3;
     private SSLSocket sslSocket;
     private static DataOutputStream dataOutputStream;
     private static DataInputStream dataInputStream;
@@ -101,6 +102,12 @@ public class Client {
 
     public int refreshChats() throws IOException {
         dataOutputStream.writeByte(REFRESH);
+        return dataInputStream.readByte();
+    }
+
+    public int sendMsg(String msg) throws IOException {
+        dataOutputStream.writeByte(SEND);
+        dataOutputStream.writeUTF(msg);
         return dataInputStream.readByte();
     }
 

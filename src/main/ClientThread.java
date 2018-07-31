@@ -16,6 +16,7 @@ public class ClientThread extends Thread {
     private static final int JOIN = 0;
     private static final int CREATE = 1;
     private static final int REFRESH = 2;
+    private static final int SEND = 3;
     private static final int OK = 0;
     private static final int ERROR = 1;
     private SSLSocket sslSocket;
@@ -108,6 +109,14 @@ public class ClientThread extends Thread {
             } else {
                 dataOutputStream.writeByte(OK);
                 sendChats(dataOutputStream, Server.getChats());
+            }
+        } else if (request == SEND) {
+            String msg = dataInputStream.readUTF();
+            if (msg != null && msg != "") {
+
+            } else {
+                System.out.println("Could not print message.");
+                dataOutputStream.writeByte(ERROR);
             }
         } else {
             System.out.println("Invalid request");

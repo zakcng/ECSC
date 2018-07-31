@@ -20,6 +20,7 @@ public class Server {
     private static final String DEFAULT_PORT = "10000";
     private static final String DEFAULT_KEYSTORE = System.getProperty("user.dir") + "/data/myKeyStore.jks";
     private static final String DEFAULT_KEYSTORE_PASSWORD = "password";
+    private ArrayList<Connection> clientList = new ArrayList<>();
 
     //TODO load in chats
     private static HashMap<String, Chat> chats = new HashMap<>();
@@ -48,5 +49,16 @@ public class Server {
 
     public static void setChats(HashMap<String, Chat> chats) {
         Server.chats = chats;
+    }
+
+    //TODO - open new socket in connection which is used to broadcast messages to ips belonging to a particular chat.
+    private class Connection {
+        private DataInputStream inputStream;
+        private OutputStream outputStream;
+        private SSLSocket sslSocket;
+
+        public Connection() {
+
+        }
     }
 }

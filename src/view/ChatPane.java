@@ -74,7 +74,7 @@ public class ChatPane extends BorderPane {
         this.txtMessages.clear();
     }
 
-    public String getTxtMessages() {
+    public String getTxtMessage() {
         return this.txtMessages.getText();
     }
 
