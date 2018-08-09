@@ -9,6 +9,7 @@ import javafx.geometry.Orientation;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import model.User;
 
 import java.util.List;
 
@@ -18,14 +19,14 @@ public class ChatPane extends BorderPane {
     TextField txtOutgoing;
     Button btnSend;
 
-    private ListView<List> lvwUsers;
-    private ObservableList<List> olUsers;
+    private ListView<String> lvwUsers;
+    private ObservableList<String> olUsers;
 
 
     public ChatPane() {
         olUsers = FXCollections.observableArrayList();
 
-        lvwUsers = new ListView<>(olUsers);
+        lvwUsers = new ListView<String>(olUsers);
 
         BorderPane inner = new BorderPane();
         inner.setPadding(new Insets(20, 20, 20, 20));
@@ -76,6 +77,10 @@ public class ChatPane extends BorderPane {
 
     public String getTxtMessage() {
         return this.txtMessages.getText();
+    }
+
+    public void addUserToList(User user) {
+        olUsers.add(user.getNickname());
     }
 
     public void addSendHandler(EventHandler<ActionEvent> handler) {
