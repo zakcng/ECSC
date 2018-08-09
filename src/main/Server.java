@@ -4,15 +4,12 @@ import com.sun.security.sasl.Provider;
 import model.Chat;
 
 import java.io.*;
-import java.net.ServerSocket;
-import java.net.Socket;
 import java.security.Security;
 import java.util.*;
 import javax.net.ssl.SSLServerSocket;
 import javax.net.ssl.SSLServerSocketFactory;
 import javax.net.ssl.SSLSocket;
 
-import static java.util.Objects.hash;
 
 public class Server {
     //Default values provided if no arguments are provided during execution.
@@ -20,7 +17,8 @@ public class Server {
     private static final String DEFAULT_PORT = "10000";
     private static final String DEFAULT_KEYSTORE = System.getProperty("user.dir") + "/data/myKeyStore.jks";
     private static final String DEFAULT_KEYSTORE_PASSWORD = "password";
-    private ArrayList<Connection> clientList = new ArrayList<>();
+    private static final int MESSAGE = 4;
+    private static ArrayList<Connection> clientList = new ArrayList<>();
 
     //TODO load in chats
     private static HashMap<String, Chat> chats = new HashMap<>();
@@ -36,15 +34,30 @@ public class Server {
         while (!sslServerSocket.isClosed()) {
             try {
                 System.out.println("Hi");
-                new Thread(new ClientThread((SSLSocket) sslServerSocket.accept())).start();
+                SSLSocket sslSocket = (SSLSocket) sslServerSocket.accept();
+                getConnections().add(new Connection(sslSocket));
+                new Thread(new ServerThread(sslSocket)).start();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public static HashMap<String, Chat> getChats() {
+    protected static HashMap<String, Chat> getChats() {
         return chats;
+    }
+
+    protected static ArrayList<Connection> getConnections() {
+        return clientList;
+    }
+
+    protected static void msgConnections(String msg) throws IOException {
+        for (Connection c: getConnections()) {
+            System.out.println("Messaging connections now.");
+            c.dataOutputStream.writeByte(MESSAGE);
+            c.dataOutputStream.writeBytes(msg);
+        }
+        System.out.println("Gets to end of msgConnections");
     }
 
     public static void setChats(HashMap<String, Chat> chats) {
@@ -52,13 +65,15 @@ public class Server {
     }
 
     //TODO - open new socket in connection which is used to broadcast messages to ips belonging to a particular chat.
-    private class Connection {
-        private DataInputStream inputStream;
-        private OutputStream outputStream;
+    private static class Connection {
+        private DataInputStream dataInputStream;
+        private DataOutputStream dataOutputStream;
         private SSLSocket sslSocket;
 
-        public Connection() {
-
+        public Connection(SSLSocket sslSocket) throws IOException {
+            this.sslSocket = sslSocket;
+            this.dataInputStream = new DataInputStream(sslSocket.getInputStream());
+            this.dataOutputStream = new DataOutputStream(sslSocket.getOutputStream());
         }
     }
 }

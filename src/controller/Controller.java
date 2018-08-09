@@ -7,6 +7,7 @@ import javafx.scene.control.Alert.AlertType;
 
 import javafx.scene.control.TextInputDialog;
 import main.Client;
+import main.ClientThread;
 import main.Server;
 import model.User;
 import model.Chat;
@@ -63,6 +64,7 @@ public class Controller {
 
         lp.getNcp().addTestHandler(new TestHandler());
 
+        cp.addSendHandler(new SendHandler());
         //cp.addSendHandler(new HANDLER);
 
         mmb.addExitHandler(e -> System.exit(0));
@@ -148,7 +150,10 @@ public class Controller {
 
                 if (response == OK) {
 					//Change tab on OK status
+                    //TODO replace with constant variable
                     view.changeTab(1);
+                    //TODO pass chatPane into client to update with messages
+                    new Thread(new ClientThread(client, cp)).start();
                 }
 
 
@@ -186,6 +191,7 @@ public class Controller {
         public void handle(ActionEvent e) {
             try {
                 String msg = cp.getTxtMessage();
+                System.out.println(cp.getTxtMessage());
                 int attempts = 0;
                 int response = ERROR;
 
@@ -193,7 +199,7 @@ public class Controller {
                    response = client.sendMsg(msg);
                    attempts++;
                 } while (response == ERROR && attempts < 3);
-
+                System.out.println("We got passed the loop");
 
             } catch (IOException E) {
                 E.printStackTrace();
@@ -208,7 +214,7 @@ public class Controller {
 
         public void handle(ActionEvent e) {
             System.out.println("Testing");
-
+            System.out.println(cp.getTxtMessage());
         }
     }
 

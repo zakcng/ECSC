@@ -24,18 +24,6 @@ public class ApplicationLoader extends Application {
 		stage.setMinHeight(550);
 		stage.setTitle("EPC");
 
-        Task <Void> task = new Task<Void>() {
-            @Override public Void call() throws InterruptedException {
-                //CODE
-
-                return null;
-            }
-        };
-
-        Thread thread = new Thread(task);
-        thread.setDaemon(true);
-        thread.start();
-
 		stage.setScene(new Scene(view));
 		stage.show();
 

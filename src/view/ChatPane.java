@@ -68,15 +68,15 @@ public class ChatPane extends BorderPane {
     }
 
     public void appendLineToTxtMessages(String line) {
-        this.txtMessages.appendText(line);
+        txtMessages.appendText(line);
     }
 
     public void clearTxtMessages() {
-        this.txtMessages.clear();
+        txtMessages.clear();
     }
 
     public String getTxtMessage() {
-        return this.txtMessages.getText();
+        return txtOutgoing.getText();
     }
 
     public void addUserToList(User user) {
