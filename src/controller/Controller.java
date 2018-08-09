@@ -208,7 +208,7 @@ public class Controller {
 
         public void handle(ActionEvent e) {
             System.out.println("Testing");
-            passwordDialog();
+
         }
     }
 
