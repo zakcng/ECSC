@@ -8,16 +8,13 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextInputDialog;
 import main.Client;
 import main.ClientThread;
-import main.Server;
 import model.User;
 import model.Chat;
+import model.Protocol;
 
 import view.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Optional;
 
 
@@ -30,8 +27,6 @@ public class Controller {
     private NewChatPane ncp;
     private ChatPane cp;
     private Client client;
-    private final int OK = 0;
-    private final int ERROR = 1;
 
     //transient fields
     private transient String hashedPass = null;
@@ -98,7 +93,7 @@ public class Controller {
 
                 response = client.createChat(name, hashedPass, passEnabled, logEnabled);
 
-                if (response == ERROR) {
+                if (response == Protocol.ERROR.ordinal()) {
                     System.out.println("Error, server could not create chat.");
                     System.out.println("Ensure a unique server name and non blank password if enabled.");
                 }
@@ -148,7 +143,7 @@ public class Controller {
                 int response = client.joinChat(lp.getSelectedChat(), client.hash(password), user);
 
 
-                if (response == OK) {
+                if (response == Protocol.OK.ordinal()) {
 					//Change tab on OK status
                     //TODO replace with constant variable
                     view.changeTab(1);
@@ -170,7 +165,7 @@ public class Controller {
         public void handle(ActionEvent e) {
             view.changeTab(2);
             try {
-                if (client.refreshChats() == OK) {
+                if (client.refreshChats() == Protocol.OK.ordinal()) {
                     client.setChatNames(client.loadChats(client.getDataInputStream()));
                     lp.clearChatList();
 
@@ -193,12 +188,12 @@ public class Controller {
                 String msg = cp.getTxtMessage();
                 System.out.println(cp.getTxtMessage());
                 int attempts = 0;
-                int response = ERROR;
+                int response = Protocol.ERROR.ordinal();
 
                 do {
                    response = client.sendMsg(msg);
                    attempts++;
-                } while (response == ERROR && attempts < 3);
+                } while (response == Protocol.ERROR.ordinal() && attempts < 3);
                 System.out.println("We got passed the loop");
 
             } catch (IOException E) {

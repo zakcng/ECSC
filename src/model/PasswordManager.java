@@ -1,7 +1,6 @@
 package model;
 
-import model.Chat;
-
+import model.Protocol;
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
@@ -16,8 +15,6 @@ import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 
 public class PasswordManager {
-    private static final int OK = 0;
-    private static final int ERROR = 1;
     //public native int createFile();
     //public native int addPass(String chatName, String hashedPass);
     //public native int removePass(String chatName, String hashedPass);
@@ -79,9 +76,9 @@ public class PasswordManager {
     public int createFile() {
         File chats = new File("chats.txt");
         if (chats.exists()) {
-            return OK;
+            return Protocol.OK.ordinal();
         } else {
-            return ERROR;
+            return Protocol.ERROR.ordinal();
         }
     }
 

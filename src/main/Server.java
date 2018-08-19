@@ -17,7 +17,6 @@ public class Server {
     private static final String DEFAULT_PORT = "10000";
     private static final String DEFAULT_KEYSTORE = System.getProperty("user.dir") + "/data/myKeyStore.jks";
     private static final String DEFAULT_KEYSTORE_PASSWORD = "password";
-    private static final int MESSAGE = 4;
     private static ArrayList<Connection> clientList = new ArrayList<>();
 
     //TODO load in chats
@@ -53,8 +52,6 @@ public class Server {
 
     protected static void msgConnections(String msg) throws IOException {
         for (Connection c: getConnections()) {
-            System.out.println("Messaging connections now.");
-            c.dataOutputStream.writeByte(MESSAGE);
             c.dataOutputStream.writeBytes(msg);
         }
         System.out.println("Gets to end of msgConnections");
@@ -68,10 +65,10 @@ public class Server {
     private static class Connection {
         private DataInputStream dataInputStream;
         private DataOutputStream dataOutputStream;
-        private SSLSocket sslSocket;
+        private SSLSocket sslMsgSocket;
 
         public Connection(SSLSocket sslSocket) throws IOException {
-            this.sslSocket = sslSocket;
+            this.sslMsgSocket = sslSocket;
             this.dataInputStream = new DataInputStream(sslSocket.getInputStream());
             this.dataOutputStream = new DataOutputStream(sslSocket.getOutputStream());
         }

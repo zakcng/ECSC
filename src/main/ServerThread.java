@@ -2,23 +2,15 @@ package main;
 
 import model.Chat;
 import model.User;
+import model.Protocol;
 
 import javax.net.ssl.SSLSocket;
 import java.io.*;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
 
 public class ServerThread extends Thread {
-    private static final int JOIN = 0;
-    private static final int CREATE = 1;
-    private static final int REFRESH = 2;
-    private static final int SEND = 3;
-    private static final int OK = 0;
-    private static final int ERROR = 1;
     private SSLSocket sslSocket;
 
     public ServerThread(SSLSocket sslSocket) {
@@ -66,7 +58,7 @@ public class ServerThread extends Thread {
 
     public static void handleRequest(int request, DataInputStream dataInputStream, DataOutputStream dataOutputStream,
                                      ObjectInputStream objectInputStream, HashMap<String, Chat> chats) throws IOException {
-        if (request == CREATE) {
+        if (request == Protocol.CREATE.ordinal()) {
             String chatName = dataInputStream.readUTF();
             String hashedPass = dataInputStream.readUTF();
             Boolean passEnabled = dataInputStream.readBoolean();
@@ -77,12 +69,12 @@ public class ServerThread extends Thread {
                 hashedPass = passEnabled ? hashedPass : null;
                 Chat chat = new Chat(chatName, hashedPass, logEnabled, passEnabled);
                 chats.put(chatName, chat);
-                dataOutputStream.writeByte(OK);
+                dataOutputStream.writeByte(Protocol.OK.ordinal());
             } else {
-                dataOutputStream.writeByte(ERROR);
+                dataOutputStream.writeByte(Protocol.ERROR.ordinal());
             }
 
-        } else if (request == JOIN) {
+        } else if (request == Protocol.JOIN.ordinal()) {
             try {
                 String chatName = dataInputStream.readUTF();
                 String hashedPass = dataInputStream.readUTF();
@@ -93,31 +85,31 @@ public class ServerThread extends Thread {
 
                 if (!chat.getPassEnabled() || (hashedPass.equals(chat.getChatPassword()) && !user.blocked())) {
                     chat.getUsers().add(user);
-                    dataOutputStream.writeByte(OK);
+                    dataOutputStream.writeByte(Protocol.OK.ordinal());
                 } else {
-                    dataOutputStream.writeByte(ERROR);
+                    dataOutputStream.writeByte(Protocol.ERROR.ordinal());
                 }
             } catch(ClassNotFoundException e) {
-                dataOutputStream.writeByte(ERROR);
+                dataOutputStream.writeByte(Protocol.ERROR.ordinal());
             }
-        } else if (request == REFRESH) {
+        } else if (request == Protocol.REFRESH.ordinal()) {
             if (Server.getChats().size() == 0) {
-                dataOutputStream.writeByte(ERROR);
+                dataOutputStream.writeByte(Protocol.ERROR.ordinal());
             } else {
-                dataOutputStream.writeByte(OK);
+                dataOutputStream.writeByte(Protocol.OK.ordinal());
                 sendChats(dataOutputStream, Server.getChats());
             }
-        } else if (request == SEND) {
+        } else if (request == Protocol.SEND.ordinal()) {
             String msg = dataInputStream.readUTF();
             System.out.println(msg);
             if (!msg.equals("")) {
                 //TODO tell server to write message to clients
                 System.out.println("SEND");
-                dataOutputStream.writeByte(OK);
+                dataOutputStream.writeByte(Protocol.OK.ordinal());
                 Server.msgConnections(msg);
             } else {
                 System.out.println("Could not print message.");
-                dataOutputStream.writeByte(ERROR);
+                dataOutputStream.writeByte(Protocol.ERROR.ordinal());
             }
         } else {
             System.out.println("Invalid request");

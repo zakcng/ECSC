@@ -3,18 +3,15 @@ package main;
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
 import java.io.*;
-import java.net.Socket;
 import java.security.Security;
 import java.util.ArrayList;
+import model.Protocol;
 
 import com.sun.security.sasl.Provider;
 import model.User;
 import org.bouncycastle.jcajce.provider.digest.SHA3;
 import org.bouncycastle.util.encoders.Hex;
 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 
 
@@ -22,10 +19,6 @@ public class Client {
     //Default values provided if no arguments are provided during execution.
     private final String DEFAULT_IP = "127.0.0.1";
     private static final Integer DEFAULT_PORT = 10000;
-    private final int JOIN = 0;
-    private final int CREATE = 1;
-    private final int REFRESH = 2;
-    private final int SEND = 3;
     private SSLSocket sslSocket;
     private static DataOutputStream dataOutputStream;
     private static DataInputStream dataInputStream;
@@ -61,7 +54,7 @@ public class Client {
      * @throws IOException
      */
     public int createChat(String name, String passHash, Boolean passEnabled, Boolean logEnabled) throws IOException {
-        dataOutputStream.writeByte(CREATE);
+        dataOutputStream.writeByte(Protocol.CREATE.ordinal());
         dataOutputStream.writeUTF(name);
         dataOutputStream.writeUTF(passHash);
         dataOutputStream.writeBoolean(passEnabled);
@@ -93,7 +86,7 @@ public class Client {
      * @throws IOException
      */
     public int joinChat(String chatName, String hashedPass, User user) throws IOException {
-        dataOutputStream.writeByte(JOIN);
+        dataOutputStream.writeByte(Protocol.JOIN.ordinal());
         dataOutputStream.writeUTF(chatName);
         dataOutputStream.writeUTF(hashedPass); //TODO replace password with hashedPass
         objectOutputStream.writeObject(user);
@@ -101,12 +94,12 @@ public class Client {
     }
 
     public int refreshChats() throws IOException {
-        dataOutputStream.writeByte(REFRESH);
+        dataOutputStream.writeByte(Protocol.REFRESH.ordinal());
         return dataInputStream.readByte();
     }
 
     public int sendMsg(String msg) throws IOException {
-        dataOutputStream.writeByte(SEND);
+        dataOutputStream.writeByte(Protocol.SEND.ordinal());
         dataOutputStream.writeUTF(msg);
         return dataInputStream.readByte();
     }
