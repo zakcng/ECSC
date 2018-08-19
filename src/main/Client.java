@@ -18,8 +18,10 @@ import org.bouncycastle.util.encoders.Hex;
 public class Client {
     //Default values provided if no arguments are provided during execution.
     private final String DEFAULT_IP = "127.0.0.1";
-    private static final Integer DEFAULT_PORT = 10000;
-    private SSLSocket sslSocket;
+    private static final Integer DEFAULT_REQUEST_PORT = 10000;
+    private static final Integer DEFAULT_MSG_PORT = 10001;
+    private SSLSocket sslRequestSocket;
+    private SSLSocket sslMsgSocket;
     private static DataOutputStream dataOutputStream;
     private static DataInputStream dataInputStream;
     private static ObjectOutputStream objectOutputStream;
@@ -37,10 +39,12 @@ public class Client {
             System.setProperty("javax.net.ssl.trustStorePassword", DEFAULT_TRUSTORE_PASSWORD);
 
             SSLSocketFactory sslSocketFactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
-            this.sslSocket = (SSLSocket) sslSocketFactory.createSocket(DEFAULT_IP, DEFAULT_PORT);
-            dataInputStream = new DataInputStream(sslSocket.getInputStream());
-            dataOutputStream = new DataOutputStream(sslSocket.getOutputStream());
-            objectOutputStream = new ObjectOutputStream(sslSocket.getOutputStream());
+            this.sslRequestSocket = (SSLSocket) sslSocketFactory.createSocket(DEFAULT_IP, DEFAULT_REQUEST_PORT);
+            this.sslMsgSocket = (SSLSocket) sslSocketFactory.createSocket(DEFAULT_IP, DEFAULT_MSG_PORT);
+
+            dataInputStream = new DataInputStream(sslRequestSocket.getInputStream());
+            dataOutputStream = new DataOutputStream(sslRequestSocket.getOutputStream());
+            objectOutputStream = new ObjectOutputStream(sslRequestSocket.getOutputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -131,6 +135,10 @@ public class Client {
 
     public static DataInputStream getDataInputStream() {
         return dataInputStream;
+    }
+
+    public SSLSocket getSslMsgSocket() {
+        return sslMsgSocket;
     }
 
     public ArrayList<String> getChatNames() {

@@ -14,7 +14,8 @@ import javax.net.ssl.SSLSocket;
 public class Server {
     //Default values provided if no arguments are provided during execution.
     private static final String DEFAULT_IP = "127.0.0.1";
-    private static final String DEFAULT_PORT = "10000";
+    private static final String DEFAULT_REQUEST_PORT = "10000";
+    private static final String DEFAULT_MSG_PORT = "10001";
     private static final String DEFAULT_KEYSTORE = System.getProperty("user.dir") + "/data/myKeyStore.jks";
     private static final String DEFAULT_KEYSTORE_PASSWORD = "password";
     private static ArrayList<Connection> clientList = new ArrayList<>();
@@ -28,14 +29,22 @@ public class Server {
         System.setProperty("javax.net.ssl.keyStorePassword", DEFAULT_KEYSTORE_PASSWORD);
 
         SSLServerSocketFactory sslServerSocketFactory = (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
-        SSLServerSocket sslServerSocket = (SSLServerSocket) sslServerSocketFactory.createServerSocket(Integer.parseInt(DEFAULT_PORT));
+        SSLServerSocket sslServerRequestSocket = (SSLServerSocket) sslServerSocketFactory.createServerSocket(Integer.parseInt(DEFAULT_REQUEST_PORT));
+        SSLServerSocket sslServerMsgSocket = (SSLServerSocket) sslServerSocketFactory.createServerSocket(Integer.parseInt(DEFAULT_MSG_PORT));
 
-        while (!sslServerSocket.isClosed()) {
+        while (!sslServerRequestSocket.isClosed()) {
             try {
                 System.out.println("Hi");
-                SSLSocket sslSocket = (SSLSocket) sslServerSocket.accept();
-                getConnections().add(new Connection(sslSocket));
-                new Thread(new ServerThread(sslSocket)).start();
+                SSLSocket sslRequestSocket = (SSLSocket) sslServerRequestSocket.accept();
+                SSLSocket sslMsgSocket = (SSLSocket) sslServerMsgSocket.accept();
+
+                if (!sslRequestSocket.getInetAddress().equals(sslMsgSocket.getInetAddress())) {
+                    System.out.println("Connection dropped");
+                    continue;
+                }
+
+                getConnections().add(new Connection(sslMsgSocket));
+                new Thread(new ServerThread(sslRequestSocket)).start();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -52,7 +61,7 @@ public class Server {
 
     protected static void msgConnections(String msg) throws IOException {
         for (Connection c: getConnections()) {
-            c.dataOutputStream.writeBytes(msg);
+            c.dataOutputStream.writeUTF(msg);
         }
         System.out.println("Gets to end of msgConnections");
     }
