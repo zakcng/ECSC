@@ -6,6 +6,8 @@ import model.Protocol;
 
 import javax.net.ssl.SSLSocket;
 import java.io.*;
+import java.net.InetAddress;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -27,7 +29,7 @@ public class ServerThread extends Thread {
             while (true) {
                 //Handles initial client request to join or create chat:
                 int clientRequest = dataInputStream.readByte();
-                handleRequest(clientRequest, dataInputStream, dataOutputStream, objectInputStream, Server.getChats());
+                handleRequest(clientRequest, dataInputStream, dataOutputStream, objectInputStream, sslSocket, Server.getChats());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -57,7 +59,7 @@ public class ServerThread extends Thread {
     }
 
     public static void handleRequest(int request, DataInputStream dataInputStream, DataOutputStream dataOutputStream,
-                                     ObjectInputStream objectInputStream, HashMap<String, Chat> chats) throws IOException {
+                                     ObjectInputStream objectInputStream, SSLSocket sslSocket, HashMap<String, Chat> chats) throws IOException {
         if (request == Protocol.CREATE.ordinal()) {
             String chatName = dataInputStream.readUTF();
             String hashedPass = dataInputStream.readUTF();
@@ -103,10 +105,10 @@ public class ServerThread extends Thread {
             String msg = dataInputStream.readUTF();
             System.out.println(msg);
             if (!msg.equals("")) {
-                //TODO tell server to write message to clients
                 System.out.println("SEND");
-                dataOutputStream.writeByte(Protocol.OK.ordinal());
                 Server.msgConnections(msg);
+                dataOutputStream.writeByte(Protocol.OK.ordinal());
+
             } else {
                 System.out.println("Could not print message.");
                 dataOutputStream.writeByte(Protocol.ERROR.ordinal());

@@ -2,6 +2,7 @@ package main;
 import com.sun.security.sasl.Provider;
 
 import model.Chat;
+import model.User;
 
 import java.io.*;
 import java.security.Security;
@@ -31,10 +32,9 @@ public class Server {
         SSLServerSocketFactory sslServerSocketFactory = (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
         SSLServerSocket sslServerRequestSocket = (SSLServerSocket) sslServerSocketFactory.createServerSocket(Integer.parseInt(DEFAULT_REQUEST_PORT));
         SSLServerSocket sslServerMsgSocket = (SSLServerSocket) sslServerSocketFactory.createServerSocket(Integer.parseInt(DEFAULT_MSG_PORT));
-
+        
         while (!sslServerRequestSocket.isClosed()) {
             try {
-                System.out.println("Hi");
                 SSLSocket sslRequestSocket = (SSLSocket) sslServerRequestSocket.accept();
                 SSLSocket sslMsgSocket = (SSLSocket) sslServerMsgSocket.accept();
 

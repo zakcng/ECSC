@@ -79,7 +79,6 @@ public class Controller {
     private class CreateChatHandler implements EventHandler<ActionEvent> {
 
         public void handle(ActionEvent e) {
-            System.out.println("Hello");
             String name = lp.getNcp().getTxtName();
             hashedPass = client.hash(lp.getNcp().getTxtChatPassword());
 
@@ -194,7 +193,6 @@ public class Controller {
                    response = client.sendMsg(msg);
                    attempts++;
                 } while (response == Protocol.ERROR.ordinal() && attempts < 3);
-                System.out.println("We got passed the loop");
 
             } catch (IOException E) {
                 E.printStackTrace();
