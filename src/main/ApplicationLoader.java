@@ -33,9 +33,16 @@ public class ApplicationLoader extends Application {
 		stage.show();
 
 		//Add function
-		view.setOnKeyPressed((event) -> { if(event.getCode() == KeyCode.ENTER) { view.getCp(); } });
+		view.setOnKeyReleased(new EventHandler<KeyEvent>() {
+			@Override
+			public void handle(KeyEvent keyEvent) {
+				if (keyEvent.getCode() == KeyCode.ENTER) {
+					System.out.println("Event triggered");
+				}
+			}
+		});
 
-	}
+		}
 
 
 	public static void main(String[] args) {
