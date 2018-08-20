@@ -79,12 +79,20 @@ public class ChatPane extends BorderPane {
         return txtOutgoing.getText();
     }
 
+    public void clearTextOutgoing(){
+        txtOutgoing.clear();
+    }
+
     public void addUserToList(User user) {
         olUsers.add(user.getNickname());
     }
 
     public void addSendHandler(EventHandler<ActionEvent> handler) {
         btnSend.setOnAction(handler);
+    }
+
+    public TextField getTxtOutgoing() {
+        return txtOutgoing;
     }
 
 }

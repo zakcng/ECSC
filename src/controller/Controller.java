@@ -2,6 +2,7 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
@@ -197,6 +198,8 @@ public class Controller {
             } catch (IOException E) {
                 E.printStackTrace();
             }
+
+            cp.clearTextOutgoing();
             //Send Chat Button Handler
 
         }
@@ -243,6 +246,8 @@ public class Controller {
     }
 
 
+
+
     //helper method to build dialogs
     private void alertDialogBuilder(AlertType type, String title, String header, String content) {
         Alert alert = new Alert(type);
@@ -251,4 +256,5 @@ public class Controller {
         alert.setContentText(content);
         alert.showAndWait();
     }
+
 }
