@@ -95,6 +95,13 @@ public class ChatPane extends BorderPane {
         return txtOutgoing;
     }
 
+    public Boolean isTxtOutgoingEmpty() {
+        if (txtOutgoing.getText().isEmpty())
+            return true;
+        else
+            return false;
+    }
+
     public Button getBtnSend() {
         return btnSend;
     }

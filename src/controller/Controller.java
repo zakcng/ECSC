@@ -184,23 +184,8 @@ public class Controller {
     private class SendHandler implements EventHandler<ActionEvent> {
 
         public void handle(ActionEvent e) {
-            try {
-                String msg = cp.getTxtMessage();
-                System.out.println(cp.getTxtMessage());
-                int attempts = 0;
-                int response = Protocol.ERROR.ordinal();
-
-                do {
-                   response = client.sendMsg(msg);
-                   attempts++;
-                } while (response == Protocol.ERROR.ordinal() && attempts < 3);
-
-            } catch (IOException E) {
-                E.printStackTrace();
-            }
-
-            cp.clearTextOutgoing();
             //Send Chat Button Handler
+            sendMessageFunc();
 
         }
     }
@@ -256,4 +241,31 @@ public class Controller {
         alert.showAndWait();
     }
 
-}
+    public void sendMessageFunc() {
+        if (cp.isTxtOutgoingEmpty()) {
+            //Create Error Message
+            System.out.println("Message is empty");
+        } else {
+            try {
+                String msg = cp.getTxtMessage();
+                System.out.println(cp.getTxtMessage());
+                int attempts = 0;
+                int response = Protocol.ERROR.ordinal();
+
+                do {
+                    response = client.sendMsg(msg);
+                    attempts++;
+                } while (response == Protocol.ERROR.ordinal() && attempts < 3);
+
+            } catch (IOException E) {
+                E.printStackTrace();
+            }
+
+            cp.clearTextOutgoing();
+        }
+        }
+    }
+
+
+
+

@@ -15,12 +15,13 @@ import view.RootPane;
 public class ApplicationLoader extends Application {
 
 	private RootPane view;
+	private Controller controller;
 
 	@Override
 	public void init() {
 		view = new RootPane();
 
-		new Controller(view);
+		controller = new Controller(view);
 	}
 
 	@Override
@@ -38,6 +39,8 @@ public class ApplicationLoader extends Application {
 			public void handle(KeyEvent keyEvent) {
 				if (keyEvent.getCode() == KeyCode.ENTER) {
 					System.out.println("Event triggered");
+					controller.sendMessageFunc();
+
 				}
 			}
 		});
