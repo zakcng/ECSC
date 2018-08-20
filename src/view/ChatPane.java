@@ -95,4 +95,7 @@ public class ChatPane extends BorderPane {
         return txtOutgoing;
     }
 
+    public Button getBtnSend() {
+        return btnSend;
+    }
 }

@@ -247,7 +247,6 @@ public class Controller {
 
 
 
-
     //helper method to build dialogs
     private void alertDialogBuilder(AlertType type, String title, String header, String content) {
         Alert alert = new Alert(type);
