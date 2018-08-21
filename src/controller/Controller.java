@@ -29,6 +29,8 @@ public class Controller {
     private ChatPane cp;
     private Client client;
 
+    private User user;
+
     //transient fields
     private transient String hashedPass = null;
 
@@ -129,7 +131,7 @@ public class Controller {
 
         public void handle(ActionEvent e) {
             try {
-                User user = new User(lp.getNickname());
+                user = new User(lp.getNickname());
 
                 System.out.println(user.getIpAddress());
                 System.out.println(user.getNickname());
@@ -248,7 +250,8 @@ public class Controller {
             System.out.println("Message is empty");
         } else {
             try {
-                String msg = cp.getTxtMessage();
+                System.out.println(user.getNickname());
+                String msg = user.getNickname() + ": " + cp.getTxtMessage();
                 System.out.println(cp.getTxtMessage());
                 int attempts = 0;
                 int response = Protocol.ERROR.ordinal();
