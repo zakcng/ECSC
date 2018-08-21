@@ -81,6 +81,8 @@ public class ServerThread extends Thread {
                 String chatName = dataInputStream.readUTF();
                 String hashedPass = dataInputStream.readUTF();
                 User user = (User) objectInputStream.readObject();
+                user.setIpAddress(sslSocket.getInetAddress().toString());
+                System.out.println(sslSocket.getInetAddress().toString());
                 Chat chat = Server.getChats().get(chatName);
 
                 System.out.println("Hashed Pass: " + hashedPass + ", chat.getChatPassword(): " + chat.getChatPassword());

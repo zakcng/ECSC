@@ -11,14 +11,13 @@ public class User implements Serializable {
 
     public User(String nickname) throws Exception {
         this.nickname = nickname + "@" + InetAddress.getLocalHost().getHostName().toString();
-        this.ipAddress = InetAddress.getLocalHost().getHostAddress().toString();
+        //this.ipAddress = InetAddress.getLocalHost().getHostAddress().toString();
         this.passAttempts = 0;
         this.blocked = false;
     }
 
     public void setIpAddress(String ipAddress) {
         this.ipAddress = ipAddress;
-        System.out.println();
     }
 
     public String getIpAddress() {
