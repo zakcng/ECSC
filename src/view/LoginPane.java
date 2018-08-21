@@ -1,6 +1,8 @@
 package view;
 
+import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -70,7 +72,10 @@ public class LoginPane extends BorderPane {
     }
 
     public BooleanBinding isAnyFieldEmpty() {
-        return txtNickname.textProperty().isEmpty();
+        BooleanBinding binding = Bindings.createBooleanBinding(() -> txtNickname.getText().isEmpty(),txtNickname.textProperty());
+
+
+        return binding;
     }
 
     public String getNickname() {

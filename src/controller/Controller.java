@@ -72,6 +72,7 @@ public class Controller {
     /* this method attaches bindings in the view, e.g. for validation, and to the model to ensure synchronisation between the data model and view */
     private void attachBindings() {
 
+
         lp.addJoinChatBind(lp.isAnyFieldEmpty());
 
     }
