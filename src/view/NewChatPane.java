@@ -27,7 +27,8 @@ public class NewChatPane extends BorderPane{
         gp.setHgap(20);
         gp.setAlignment(Pos.CENTER);
 
-        txtName = new TextField("Room Name");
+        txtName = new TextField("");
+        txtName.setPromptText("Room Name");
         txtChatPassword = new PasswordField();
         txtChatPassword.setPromptText("Chat Password");
 
