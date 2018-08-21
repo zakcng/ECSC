@@ -36,7 +36,6 @@ public class Controller {
 
     public Controller(RootPane view) {
         //initialise model and view fields
-        this.client = new Client();
         this.view = view;
 
         mmb = view.getMenuBar();
@@ -49,6 +48,14 @@ public class Controller {
 
         //attach bindings within view using private helper method
         this.attachBindings();
+
+        try {
+            this.client = new Client();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(0);
+        }
+
     }
 
     private void attachEventHandlers() {
@@ -148,7 +155,7 @@ public class Controller {
 
 
                 if (response == Protocol.OK.ordinal()) {
-					//Change tab on OK status
+                    //Change tab on OK status
                     //TODO replace with constant variable
                     view.changeTab(1);
                     view.setTab0Disabled();
@@ -215,15 +222,15 @@ public class Controller {
 		}
 	}*/
 
-	private String passwordDialog() {
-	    String temp = "";
+    private String passwordDialog() {
+        String temp = "";
         TextInputDialog passwordDialog = new TextInputDialog();
         passwordDialog.setHeaderText("");
         passwordDialog.setContentText("Please enter the chat password:");
 
         Optional<String> result = passwordDialog.showAndWait();
-        if (result.isPresent()){
-            temp =  result.get();
+        if (result.isPresent()) {
+            temp = result.get();
         }
 
         return temp;
@@ -236,7 +243,6 @@ public class Controller {
     private void appendTextArea(String line) {
         cp.appendLineToTxtMessages(line);
     }
-
 
 
     //helper method to build dialogs
@@ -271,8 +277,8 @@ public class Controller {
 
             cp.clearTextOutgoing();
         }
-        }
     }
+}
 
 
 

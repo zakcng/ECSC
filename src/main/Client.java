@@ -3,6 +3,7 @@ package main;
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
 import java.io.*;
+import java.net.ConnectException;
 import java.security.Security;
 import java.util.ArrayList;
 import model.Protocol;
@@ -32,23 +33,18 @@ public class Client {
     /**
      * Will try to connect to default ip address and port nuber
      */
-    public Client() {
-        try {
-            Security.addProvider(new Provider());
-            System.setProperty("javax.net.ssl.trustStore", DEFAULT_TRUSTSTORE);
-            System.setProperty("javax.net.ssl.trustStorePassword", DEFAULT_TRUSTORE_PASSWORD);
+    public Client() throws IOException {
+        Security.addProvider(new Provider());
+        System.setProperty("javax.net.ssl.trustStore", DEFAULT_TRUSTSTORE);
+        System.setProperty("javax.net.ssl.trustStorePassword", DEFAULT_TRUSTORE_PASSWORD);
 
-            SSLSocketFactory sslSocketFactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
-            this.sslRequestSocket = (SSLSocket) sslSocketFactory.createSocket(DEFAULT_IP, DEFAULT_REQUEST_PORT);
-            this.sslMsgSocket = (SSLSocket) sslSocketFactory.createSocket(DEFAULT_IP, DEFAULT_MSG_PORT);
+        SSLSocketFactory sslSocketFactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
+        this.sslRequestSocket = (SSLSocket) sslSocketFactory.createSocket(DEFAULT_IP, DEFAULT_REQUEST_PORT);
+        this.sslMsgSocket = (SSLSocket) sslSocketFactory.createSocket(DEFAULT_IP, DEFAULT_MSG_PORT);
 
-            dataInputStream = new DataInputStream(sslRequestSocket.getInputStream());
-            dataOutputStream = new DataOutputStream(sslRequestSocket.getOutputStream());
-            objectOutputStream = new ObjectOutputStream(sslRequestSocket.getOutputStream());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+        dataInputStream = new DataInputStream(sslRequestSocket.getInputStream());
+        dataOutputStream = new DataOutputStream(sslRequestSocket.getOutputStream());
+        objectOutputStream = new ObjectOutputStream(sslRequestSocket.getOutputStream());
     }
 
     /**
