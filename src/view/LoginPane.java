@@ -1,5 +1,6 @@
 package view;
 
+import javafx.beans.binding.BooleanBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -62,6 +63,14 @@ public class LoginPane extends BorderPane {
         this.setRight(ncp);
         //this.setBottom(ButtonPane);
 
+    }
+
+    public void addJoinChatBind(BooleanBinding property) {
+        btnJoinChat.disableProperty().bind(property);
+    }
+
+    public BooleanBinding isAnyFieldEmpty() {
+        return txtNickname.textProperty().isEmpty();
     }
 
     public String getNickname() {

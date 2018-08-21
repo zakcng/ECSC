@@ -46,7 +46,7 @@ public class NewChatPane extends BorderPane{
 
         gp.add(btnCreate,0,3);
 
-        gp.add(btnTest,0,4);
+        //gp.add(btnTest,0,4);
 
         this.setCenter(gp);
 

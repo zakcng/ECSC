@@ -71,8 +71,8 @@ public class Controller {
 
     /* this method attaches bindings in the view, e.g. for validation, and to the model to ensure synchronisation between the data model and view */
     private void attachBindings() {
-        //attaches a binding such that the add button in the view will be disabled whenever either of the text fields in the NamePane are empty
-        //bp.addBtnDisableBind(np.isEitherFieldEmpty());
+
+        lp.addJoinChatBind(lp.isAnyFieldEmpty());
 
     }
 
