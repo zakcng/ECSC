@@ -33,7 +33,7 @@ public class RootPane extends BorderPane {
 
 		Tab t1 = new Tab("Login", lp);
 		Tab t2 = new Tab("Chat", cp);
-		//t2.setDisable(true);
+		t2.setDisable(true);
 		//Tab t3 = new Tab("New Chat Pane", ncp);
 
 		tp.getTabs().addAll(t1,t2);
@@ -70,6 +70,15 @@ public class RootPane extends BorderPane {
 	public int currentTab() {
 		return tp.getSelectionModel().getSelectedIndex();
 	}
+
+	public void setTab0Disabled() {
+		tp.getTabs().get(0).setDisable(true);
+	}
+
+	public void setTab1Enabled() {
+		tp.getTabs().get(1).setDisable(false);
+	}
+
 
 	public RootPane getRootPane() {
 		return this;

@@ -150,6 +150,8 @@ public class Controller {
 					//Change tab on OK status
                     //TODO replace with constant variable
                     view.changeTab(1);
+                    view.setTab0Disabled();
+                    view.setTab1Enabled();
                     //TODO pass chatPane into client to update with messages
                     new Thread(new ClientThread(client, cp)).start();
                 }
