@@ -49,7 +49,7 @@ public class ChatPane extends BorderPane {
         leftContainer.getChildren().addAll(activePane, separator2);
 
         txtMessages = new TextArea();
-        txtMessages.setDisable(true);
+        txtMessages.setEditable(false);
 
         HBox bottomContainer = new HBox();
         btnSend = new Button("Send");

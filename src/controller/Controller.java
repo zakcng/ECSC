@@ -131,6 +131,7 @@ public class Controller {
 
         public void handle(ActionEvent e) {
             try {
+                cp.clearTxtMessages();
                 user = new User(lp.getNickname());
 
                 System.out.println(user.getIpAddress());
