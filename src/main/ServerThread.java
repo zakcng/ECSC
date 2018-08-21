@@ -78,6 +78,7 @@ public class ServerThread extends Thread {
 
         } else if (request == Protocol.JOIN.ordinal()) {
             try {
+                //TODO - ensure proper password validation
                 String chatName = dataInputStream.readUTF();
                 String hashedPass = dataInputStream.readUTF();
                 User user = (User) objectInputStream.readObject();

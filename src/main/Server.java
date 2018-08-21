@@ -60,6 +60,7 @@ public class Server {
     }
 
     protected static void msgConnections(String msg) throws IOException {
+        //TODO - check that message is only sent to members of the sender chat
         for (Connection c: getConnections()) {
             c.dataOutputStream.writeUTF(msg);
         }
