@@ -185,6 +185,7 @@ public class Controller {
 
         public void handle(ActionEvent e) {
             //Send Chat Button Handler
+            System.out.println(view.getRootPane().currentTab());
             sendMessageFunc();
 
         }

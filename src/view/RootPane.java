@@ -67,6 +67,9 @@ public class RootPane extends BorderPane {
 		tp.getSelectionModel().select(index);
 	}
 
+	public int currentTab() {
+		return tp.getSelectionModel().getSelectedIndex();
+	}
 
 	public RootPane getRootPane() {
 		return this;

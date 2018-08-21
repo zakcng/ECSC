@@ -37,7 +37,7 @@ public class ApplicationLoader extends Application {
 		view.setOnKeyReleased(new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent keyEvent) {
-				if (keyEvent.getCode() == KeyCode.ENTER) {
+				if (keyEvent.getCode() == KeyCode.ENTER && view.currentTab() == 1) {
 					System.out.println("Event triggered");
 					controller.sendMessageFunc();
 
