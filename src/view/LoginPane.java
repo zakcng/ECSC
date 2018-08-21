@@ -72,10 +72,7 @@ public class LoginPane extends BorderPane {
     }
 
     public BooleanBinding isAnyFieldEmpty() {
-        BooleanBinding binding = Bindings.createBooleanBinding(() -> txtNickname.getText().isEmpty(),txtNickname.textProperty());
-
-
-        return binding;
+        return txtNickname.textProperty().isEmpty().or(lvwChats.getSelectionModel().selectedItemProperty().isNull());
     }
 
     public String getNickname() {
