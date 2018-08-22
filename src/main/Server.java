@@ -43,7 +43,7 @@ public class Server {
                     continue;
                 }
 
-                getConnections().add(new Connection(sslMsgSocket));
+                getConnections().add(new Connection(sslMsgSocket, sslRequestSocket));
                 new Thread(new ServerThread(sslRequestSocket)).start();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -59,12 +59,29 @@ public class Server {
         return clientList;
     }
 
-    protected static void msgConnections(String msg) throws IOException {
+    protected static void msgConnections(String msg, SSLSocket senderSocket) throws IOException {
+        Chat chat = getChatBySocket(senderSocket);
+
+        if (chat == null) System.out.println("Could not send message. Chat does not exist.");
         //TODO - check that message is only sent to members of the sender chat
         for (Connection c: getConnections()) {
-            c.dataOutputStream.writeUTF(msg);
+            if (chat.containsSocket(c.getSslRequestSocket())) {
+                c.dataOutputStream.writeUTF(msg);
+            }
         }
         System.out.println("Gets to end of msgConnections");
+    }
+
+    public static Chat getChatBySocket(SSLSocket sslSocket) {
+        for (String name: chats.keySet()) {
+            for (User user: chats.get(name).getUsers()) {
+                if (user.getRequestSocket() == sslSocket) {
+                    return chats.get(name);
+                }
+            }
+        }
+
+        return null;
     }
 
     public static void setChats(HashMap<String, Chat> chats) {
@@ -76,11 +93,30 @@ public class Server {
         private DataInputStream dataInputStream;
         private DataOutputStream dataOutputStream;
         private SSLSocket sslMsgSocket;
+        private SSLSocket sslRequestSocket;
+        private String sessionID;
 
-        public Connection(SSLSocket sslSocket) throws IOException {
-            this.sslMsgSocket = sslSocket;
-            this.dataInputStream = new DataInputStream(sslSocket.getInputStream());
-            this.dataOutputStream = new DataOutputStream(sslSocket.getOutputStream());
+        public Connection(SSLSocket sslMsgSocket, SSLSocket sslRequestSocket) throws IOException {
+            this.sslMsgSocket = sslMsgSocket;
+            this.dataInputStream = new DataInputStream(sslMsgSocket.getInputStream());
+            this.dataOutputStream = new DataOutputStream(sslMsgSocket.getOutputStream());
+            this.sslRequestSocket = sslRequestSocket;
+        }
+
+        public void setSessionID(String sessionID) {
+            this.sessionID = sessionID;
+        }
+
+        public String getSessionID() {
+            return sessionID;
+        }
+
+        public SSLSocket getSslMsgSocket() {
+            return sslMsgSocket;
+        }
+
+        public SSLSocket getSslRequestSocket() {
+            return sslRequestSocket;
         }
     }
 }

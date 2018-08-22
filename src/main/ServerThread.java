@@ -3,6 +3,8 @@ package main;
 import model.Chat;
 import model.User;
 import model.Protocol;
+import org.bouncycastle.jcajce.provider.digest.SHA3;
+import org.bouncycastle.util.encoders.Hex;
 
 import javax.net.ssl.SSLSocket;
 import java.io.*;
@@ -10,10 +12,12 @@ import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Random;
 
 
 public class ServerThread extends Thread {
     private SSLSocket sslSocket;
+    private static Random random = new Random();
 
     public ServerThread(SSLSocket sslSocket) {
         this.sslSocket = sslSocket;
@@ -83,7 +87,8 @@ public class ServerThread extends Thread {
                 String hashedPass = dataInputStream.readUTF();
                 User user = (User) objectInputStream.readObject();
                 user.setIpAddress(sslSocket.getInetAddress().toString());
-                System.out.println(sslSocket.getInetAddress().toString());
+                user.setRequestSocket(sslSocket);
+
                 Chat chat = Server.getChats().get(chatName);
 
                 System.out.println("Hashed Pass: " + hashedPass + ", chat.getChatPassword(): " + chat.getChatPassword());
@@ -109,7 +114,7 @@ public class ServerThread extends Thread {
             System.out.println(msg);
             if (!msg.equals("")) {
                 System.out.println("SEND");
-                Server.msgConnections(msg);
+                Server.msgConnections(msg, sslSocket);
                 dataOutputStream.writeByte(Protocol.OK.ordinal());
 
             } else {
@@ -119,6 +124,18 @@ public class ServerThread extends Thread {
         } else {
             System.out.println("Invalid request");
         }
+    }
+
+    public static String hash(String stringToHash) {
+
+        //salt();
+
+        String temp = stringToHash; //+ salt();
+
+        SHA3.DigestSHA3 digestSHA3 = new SHA3.Digest512();
+        byte[] digest = digestSHA3.digest(temp.getBytes());
+
+        return (Hex.toHexString(digest));
     }
 
     public static boolean chatExists(String name, HashMap<String, Chat> chats) {

@@ -1,5 +1,6 @@
 package model;
 
+import javax.net.ssl.SSLSocket;
 import java.util.ArrayList;
 
 public class Chat {
@@ -42,6 +43,16 @@ public class Chat {
     public Boolean getPassEnabled() { return passEnabled; }
 
     public ArrayList<User> getUsers() {return users;}
+
+    public boolean containsSocket(SSLSocket sslSocket) {
+        for (User user: users) {
+            if (user.getRequestSocket() == sslSocket) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
 
     @Override

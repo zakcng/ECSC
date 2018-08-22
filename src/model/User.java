@@ -1,5 +1,6 @@
 package model;
 
+import javax.net.ssl.SSLSocket;
 import java.io.Serializable;
 import java.net.InetAddress;
 
@@ -8,10 +9,10 @@ public class User implements Serializable {
     private String ipAddress;
     private int passAttempts;
     private Boolean blocked;
+    private SSLSocket requestSocket;
 
     public User(String nickname) throws Exception {
         this.nickname = nickname + "@" + InetAddress.getLocalHost().getHostName().toString();
-        //this.ipAddress = InetAddress.getLocalHost().getHostAddress().toString();
         this.passAttempts = 0;
         this.blocked = false;
     }
@@ -48,4 +49,11 @@ public class User implements Serializable {
         return nickname;
     }
 
+    public SSLSocket getRequestSocket() {
+        return requestSocket;
+    }
+
+    public void setRequestSocket(SSLSocket requestSocket) {
+        this.requestSocket = requestSocket;
+    }
 }
