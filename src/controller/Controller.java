@@ -224,7 +224,7 @@ public class Controller {
 
     private String passwordDialog() {
         String temp = "";
-        TextInputDialog passwordDialog = new TextInputDialog();
+        PasswordDialog passwordDialog = new PasswordDialog();
         passwordDialog.setHeaderText("");
         passwordDialog.setContentText("Please enter the chat password:");
 

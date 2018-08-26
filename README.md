@@ -7,3 +7,6 @@
 ## Authors
 * **Zak Ng** - [GitHub](https://github.com/zakcng)
 * **Lewys Ward** - [GitHub](https://github.com/LewysW)
+
+References: 
+* https://gist.github.com/drguildo/ba2834bf52d624113041#file-passworddialog
