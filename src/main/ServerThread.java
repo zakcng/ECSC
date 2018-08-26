@@ -1,6 +1,7 @@
 package main;
 
 import model.Chat;
+import model.FileManager;
 import model.User;
 import model.Protocol;
 import org.bouncycastle.jcajce.provider.digest.SHA3;
@@ -8,8 +9,6 @@ import org.bouncycastle.util.encoders.Hex;
 
 import javax.net.ssl.SSLSocket;
 import java.io.*;
-import java.net.InetAddress;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Random;
@@ -73,8 +72,9 @@ public class ServerThread extends Thread {
             //TODO add regex for password to ensure security
             if (validChat(passEnabled, hashedPass, chatName) && !chatExists(chatName, chats)) {
                 hashedPass = passEnabled ? hashedPass : null;
-                Chat chat = new Chat(chatName, hashedPass, logEnabled, passEnabled);
+                Chat chat = new Chat(chatName, hashedPass, logEnabled, passEnabled, "salt");
                 chats.put(chatName, chat);
+                FileManager.encryptAndWrite("This is a secret", FileManager.chatsToString(chats), FileManager.getChatFile());
                 dataOutputStream.writeByte(Protocol.OK.ordinal());
             } else {
                 dataOutputStream.writeByte(Protocol.ERROR.ordinal());
@@ -145,15 +145,6 @@ public class ServerThread extends Thread {
     public static boolean validChat(Boolean passEnabled, String hashedPass, String chatName) {
         //True if chatName is not empty, and password is enabled and valid, or if password is disabled
         return (!chatName.equals("")) && ((passEnabled && !hashedPass.equals("")) || (!passEnabled));
-    }
-
-    public static void printChats(HashMap<String, Chat> chats) {
-        Iterator it = chats.entrySet().iterator();
-
-        while (it.hasNext()) {
-            HashMap.Entry pair = (HashMap.Entry)it.next();
-            System.out.println(pair.getKey() + " = " + pair.getValue());
-        }
     }
 
 }

@@ -2,6 +2,7 @@ package main;
 import com.sun.security.sasl.Provider;
 
 import model.Chat;
+import model.FileManager;
 import model.User;
 
 import java.io.*;
@@ -20,6 +21,7 @@ public class Server {
     private static final String DEFAULT_KEYSTORE = System.getProperty("user.dir") + "/data/myKeyStore.jks";
     private static final String DEFAULT_KEYSTORE_PASSWORD = "password";
     private static ArrayList<Connection> clientList = new ArrayList<>();
+    private static FileManager fileManager;
 
     //TODO load in chats
     private static HashMap<String, Chat> chats = new HashMap<>();
@@ -32,6 +34,8 @@ public class Server {
         SSLServerSocketFactory sslServerSocketFactory = (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
         SSLServerSocket sslServerRequestSocket = (SSLServerSocket) sslServerSocketFactory.createServerSocket(Integer.parseInt(DEFAULT_REQUEST_PORT));
         SSLServerSocket sslServerMsgSocket = (SSLServerSocket) sslServerSocketFactory.createServerSocket(Integer.parseInt(DEFAULT_MSG_PORT));
+
+        fileManager = new FileManager("data/chats.encrypted");
         
         while (!sslServerRequestSocket.isClosed()) {
             try {
@@ -59,6 +63,10 @@ public class Server {
         return clientList;
     }
 
+    protected static FileManager getPasswordManager() {
+        return fileManager;
+    }
+
     protected static void msgConnections(String msg, SSLSocket senderSocket) throws IOException {
         Chat chat = getChatBySocket(senderSocket);
 
@@ -82,6 +90,15 @@ public class Server {
         }
 
         return null;
+    }
+
+    public static void printChats(HashMap<String, Chat> chats) {
+        Iterator it = chats.entrySet().iterator();
+
+        while (it.hasNext()) {
+            HashMap.Entry pair = (HashMap.Entry)it.next();
+            System.out.println(pair.getKey() + " = " + pair.getValue());
+        }
     }
 
     public static void setChats(HashMap<String, Chat> chats) {

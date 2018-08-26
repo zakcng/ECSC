@@ -5,15 +5,16 @@ import java.util.ArrayList;
 
 public class Chat {
 
-    private transient String chatName, chatPassword;
+    private transient String chatName, chatPassword, chatSalt;
     private Boolean chatLogs, passEnabled;
     private ArrayList<User> users = new ArrayList<>();
 
-    public Chat(String chatName, String chatPassword, Boolean chatLogs, Boolean passEnabled) {
+    public Chat(String chatName, String chatPassword, Boolean chatLogs, Boolean passEnabled, String salt) {
         this.chatName = chatName;
         this.chatPassword = chatPassword;
         this.chatLogs = chatLogs;
         this.passEnabled = passEnabled;
+        this.chatSalt = salt;
     }
 
     public void setChatName(String chatName) {
@@ -54,6 +55,9 @@ public class Chat {
         return false;
     }
 
+    public String getChatSalt() {
+        return chatSalt;
+    }
 
     @Override
     public String toString() {

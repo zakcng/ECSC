@@ -236,8 +236,8 @@ public class Controller {
         return temp;
     }
 
-    private void createChat(String chatName, String chatPassword, Boolean chatLog, Boolean passwordEnabled) {
-        Chat chat = new Chat(chatName, chatPassword, chatLog, passwordEnabled);
+    private void createChat(String chatName, String chatPassword, Boolean chatLog, Boolean passwordEnabled, String salt) {
+        Chat chat = new Chat(chatName, chatPassword, chatLog, passwordEnabled, salt);
     }
 
     private void appendTextArea(String line) {
