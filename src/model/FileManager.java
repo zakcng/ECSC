@@ -52,11 +52,11 @@ public class FileManager {
             stringBuilder.append(",");
             stringBuilder.append(chat.getChatPassword());
             stringBuilder.append(",");
-            stringBuilder.append(chat.getChatSalt());
-            stringBuilder.append(",");
             stringBuilder.append(chat.getPassEnabled());
             stringBuilder.append(",");
             stringBuilder.append(chat.getChatLogs());
+            stringBuilder.append(",");
+            stringBuilder.append(chat.getChatSalt());
             stringBuilder.append("\n");
         }
         System.out.println(stringBuilder.toString());
