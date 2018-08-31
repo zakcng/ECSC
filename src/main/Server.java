@@ -3,6 +3,7 @@ import com.sun.security.sasl.Provider;
 
 import model.Chat;
 import model.FileManager;
+import model.Protocol;
 import model.User;
 
 import java.io.*;
@@ -12,7 +13,7 @@ import javax.net.ssl.SSLServerSocket;
 import javax.net.ssl.SSLServerSocketFactory;
 import javax.net.ssl.SSLSocket;
 
-
+//TODO - when user connection closes remove user from chat.
 public class Server {
     //Default values provided if no arguments are provided during execution.
     private static final String DEFAULT_IP = "127.0.0.1";
@@ -71,10 +72,23 @@ public class Server {
         Chat chat = getChatBySocket(senderSocket);
 
         if (chat == null) System.out.println("Could not send message. Chat does not exist.");
-        //TODO - check that message is only sent to members of the sender chat
         for (Connection c: getConnections()) {
             if (chat.containsSocket(c.getSslRequestSocket())) {
+                c.dataOutputStream.writeByte(Protocol.MSG.ordinal());
                 c.dataOutputStream.writeUTF(msg);
+            }
+        }
+        System.out.println("Gets to end of msgConnections");
+    }
+
+    protected static void sendUpdatedUsers(String users, SSLSocket senderSocket) throws IOException {
+        Chat chat = getChatBySocket(senderSocket);
+
+        if (chat == null) System.out.println("Could not send users. Chat does not exist.");
+        for (Connection c: getConnections()) {
+            if (chat.containsSocket(c.getSslRequestSocket())) {
+                c.dataOutputStream.writeByte(Protocol.USERS.ordinal());
+                c.dataOutputStream.writeUTF(users);
             }
         }
         System.out.println("Gets to end of msgConnections");

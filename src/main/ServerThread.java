@@ -9,6 +9,7 @@ import org.bouncycastle.util.encoders.Hex;
 
 import javax.net.ssl.SSLSocket;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Random;
@@ -61,6 +62,22 @@ public class ServerThread extends Thread {
         }
     }
 
+    //Converts list of user nicknames to comma separated string to be sent over network.
+    public static String chatUsersToString(Chat chat) {
+        StringBuilder sb = new StringBuilder();
+        ArrayList<User> users = chat.getUsers();
+
+        for (int i = 0; i < users.size(); i++) {
+            sb.append(users.get(i).getNickname());
+
+            if (i < (users.size() - 1)) {
+                sb.append(',');
+            }
+        }
+
+        return sb.toString();
+    }
+
     public static void handleRequest(int request, DataInputStream dataInputStream, DataOutputStream dataOutputStream,
                                      ObjectInputStream objectInputStream, SSLSocket sslSocket, HashMap<String, Chat> chats) throws IOException {
         if (request == Protocol.CREATE.ordinal()) {
@@ -82,7 +99,6 @@ public class ServerThread extends Thread {
 
         } else if (request == Protocol.JOIN.ordinal()) {
             try {
-                //TODO - ensure proper password validation
                 String chatName = dataInputStream.readUTF();
                 String hashedPass = dataInputStream.readUTF();
                 User user = (User) objectInputStream.readObject();
@@ -96,6 +112,7 @@ public class ServerThread extends Thread {
                 if (!chat.getPassEnabled() || (hashedPass.equals(chat.getChatPassword()) && !user.blocked())) {
                     chat.getUsers().add(user);
                     dataOutputStream.writeByte(Protocol.OK.ordinal());
+                    Server.sendUpdatedUsers(chatUsersToString(chat), sslSocket);
                 } else {
                     dataOutputStream.writeByte(Protocol.ERROR.ordinal());
                 }

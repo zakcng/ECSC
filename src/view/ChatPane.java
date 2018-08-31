@@ -83,8 +83,12 @@ public class ChatPane extends BorderPane {
         txtOutgoing.clear();
     }
 
-    public void addUserToList(User user) {
-        olUsers.add(user.getNickname());
+    public void addUserToList(String nickName) {
+        olUsers.add(nickName);
+    }
+
+    public List<String> getListNicknames() {
+        return lvwUsers.getItems();
     }
 
     public void addSendHandler(EventHandler<ActionEvent> handler) {

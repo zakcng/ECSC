@@ -1,9 +1,6 @@
 package model;
 
 import main.Server;
-import main.ServerThread;
-import model.Protocol;
-import sun.misc.IOUtils;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -21,6 +18,7 @@ public class FileManager {
     private transient String key;
     private static File chatFile;
 
+    //TODO - let owner of server enter key on start up
     public FileManager(String dir) {
         chatFile = new File(dir);
 
