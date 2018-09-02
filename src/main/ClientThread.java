@@ -1,6 +1,7 @@
 package main;
 
 import controller.Controller;
+import javafx.application.Platform;
 import model.Protocol;
 import view.ChatPane;
 
@@ -40,13 +41,20 @@ public class ClientThread extends Thread {
                     users = dataInputStream.readUTF();
 
                     List<String> nickNames = Arrays.asList(users.split(","));
-                    List<String> items = chatPane.getListNicknames();
+                    //List<String> items = chatPane.getListNicknames();
 
-                    for (String nickName: nickNames) {
-                        if (!items.contains(nickName)) {
-                            chatPane.addUserToList(nickName);
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            chatPane.clearListNicknames();
+
+                            for (String nickName: nickNames) {
+                                //if (!items.contains(nickName)) {
+                                chatPane.addUserToList(nickName);
+                                //}
+                            }
                         }
-                    }
+                    });
                 }
 
                 serverDataCode = -1;

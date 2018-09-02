@@ -81,14 +81,18 @@ public class Server {
         System.out.println("Gets to end of msgConnections");
     }
 
-    protected static void sendUpdatedUsers(String users, SSLSocket senderSocket) throws IOException {
-        Chat chat = getChatBySocket(senderSocket);
-
+    protected static void sendUpdatedUsers(String users, Chat chat) {
         if (chat == null) System.out.println("Could not send users. Chat does not exist.");
+
         for (Connection c: getConnections()) {
-            if (chat.containsSocket(c.getSslRequestSocket())) {
-                c.dataOutputStream.writeByte(Protocol.USERS.ordinal());
-                c.dataOutputStream.writeUTF(users);
+            try {
+                if (chat.containsSocket(c.getSslRequestSocket())) {
+                    c.dataOutputStream.writeByte(Protocol.USERS.ordinal());
+                    c.dataOutputStream.writeUTF(users);
+                }
+            } catch (IOException e) {
+                System.out.println("Lmao");
+                e.printStackTrace();
             }
         }
         System.out.println("Gets to end of msgConnections");

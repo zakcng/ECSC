@@ -9,6 +9,7 @@ import org.bouncycastle.util.encoders.Hex;
 
 import javax.net.ssl.SSLSocket;
 import java.io.*;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -24,35 +25,28 @@ public class ServerThread extends Thread {
 
     public ServerThread(SSLSocket sslSocket) throws IOException {
         this.sslSocket = sslSocket;
-        this.dataInputStream = new DataInputStream(sslSocket.getInputStream());
-        this.dataOutputStream = new DataOutputStream(sslSocket.getOutputStream());
-        this.objectInputStream = new ObjectInputStream(sslSocket.getInputStream());
-
     }
 
     public void run() {
 
         try {
 
-            while (!sslSocket.isClosed()) {
+            DataInputStream dataInputStream = new DataInputStream(sslSocket.getInputStream());
+            DataOutputStream dataOutputStream = new DataOutputStream(sslSocket.getOutputStream());
+            ObjectInputStream objectInputStream = new ObjectInputStream(sslSocket.getInputStream());
+
+            while (true) {
                 //Handles initial client request to join or create chat:
                 int clientRequest = dataInputStream.readByte();
                 handleRequest(clientRequest, dataInputStream, dataOutputStream, objectInputStream, sslSocket, Server.getChats());
             }
+        } catch (EOFException e) {
+            System.out.println("EOFException!!!");
+            Chat chat = Server.getChatBySocket(sslSocket);
+            chat.removeUser(sslSocket);
+            Server.sendUpdatedUsers(chatUsersToString(chat), chat);
         } catch (IOException e) {
-            if (sslSocket.isClosed()) {
-                Chat chat = Server.getChatBySocket(sslSocket);
-                chat.removeUser(sslSocket);
-            }
-        } finally {
-            try {
-                dataInputStream.close();
-                dataOutputStream.close();
-                objectInputStream.close();
-                if (!sslSocket.isClosed()) sslSocket.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            e.printStackTrace();
         }
 
     }
@@ -128,7 +122,7 @@ public class ServerThread extends Thread {
                 if (!chat.getPassEnabled() || (hashedPass.equals(chat.getChatPassword()) && !user.blocked())) {
                     chat.getUsers().add(user);
                     dataOutputStream.writeByte(Protocol.OK.ordinal());
-                    Server.sendUpdatedUsers(chatUsersToString(chat), sslSocket);
+                    Server.sendUpdatedUsers(chatUsersToString(chat), Server.getChatBySocket(sslSocket));
                 } else {
                     dataOutputStream.writeByte(Protocol.ERROR.ordinal());
                 }

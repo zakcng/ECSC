@@ -8,6 +8,7 @@ public class Chat {
     private transient String chatName, chatPassword, chatSalt;
     private Boolean chatLogs, passEnabled;
     private ArrayList<User> users = new ArrayList<>();
+    private final Object mutex = new Object();
 
     public Chat(String chatName, String chatPassword, Boolean chatLogs, Boolean passEnabled, String salt) {
         this.chatName = chatName;
@@ -56,9 +57,11 @@ public class Chat {
     }
 
     public void removeUser(SSLSocket sslSocket) {
-        for (User user: users) {
-            if (user.getRequestSocket().equals(sslSocket)) {
-                users.remove(user);
+        synchronized (mutex) {
+            for (User user: users) {
+                if (user.getRequestSocket().equals(sslSocket)) {
+                    users.remove(user);
+                }
             }
         }
     }

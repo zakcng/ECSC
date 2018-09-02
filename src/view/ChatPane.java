@@ -91,6 +91,10 @@ public class ChatPane extends BorderPane {
         return lvwUsers.getItems();
     }
 
+    public void clearListNicknames() {
+        olUsers.clear();
+    }
+
     public void addSendHandler(EventHandler<ActionEvent> handler) {
         btnSend.setOnAction(handler);
     }
