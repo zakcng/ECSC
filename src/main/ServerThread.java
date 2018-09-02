@@ -17,26 +17,42 @@ import java.util.Random;
 
 public class ServerThread extends Thread {
     private SSLSocket sslSocket;
+    private DataInputStream dataInputStream;
+    private DataOutputStream dataOutputStream;
+    private ObjectInputStream objectInputStream;
     private static Random random = new Random();
 
-    public ServerThread(SSLSocket sslSocket) {
+    public ServerThread(SSLSocket sslSocket) throws IOException {
         this.sslSocket = sslSocket;
+        this.dataInputStream = new DataInputStream(sslSocket.getInputStream());
+        this.dataOutputStream = new DataOutputStream(sslSocket.getOutputStream());
+        this.objectInputStream = new ObjectInputStream(sslSocket.getInputStream());
+
     }
 
     public void run() {
 
         try {
-            DataInputStream dataInputStream = new DataInputStream(sslSocket.getInputStream());
-            DataOutputStream dataOutputStream = new DataOutputStream(sslSocket.getOutputStream());
-            ObjectInputStream objectInputStream = new ObjectInputStream(sslSocket.getInputStream());
 
-            while (true) {
+            while (!sslSocket.isClosed()) {
                 //Handles initial client request to join or create chat:
                 int clientRequest = dataInputStream.readByte();
                 handleRequest(clientRequest, dataInputStream, dataOutputStream, objectInputStream, sslSocket, Server.getChats());
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            if (sslSocket.isClosed()) {
+                Chat chat = Server.getChatBySocket(sslSocket);
+                chat.removeUser(sslSocket);
+            }
+        } finally {
+            try {
+                dataInputStream.close();
+                dataOutputStream.close();
+                objectInputStream.close();
+                if (!sslSocket.isClosed()) sslSocket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
     }

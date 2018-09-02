@@ -55,6 +55,14 @@ public class Chat {
         return false;
     }
 
+    public void removeUser(SSLSocket sslSocket) {
+        for (User user: users) {
+            if (user.getRequestSocket().equals(sslSocket)) {
+                users.remove(user);
+            }
+        }
+    }
+
     public String getChatSalt() {
         return chatSalt;
     }
