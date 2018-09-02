@@ -106,6 +106,7 @@ public class Controller {
                 if (response == Protocol.ERROR.ordinal()) {
                     System.out.println("Error, server could not create chat.");
                     System.out.println("Ensure a unique server name and non blank password if enabled.");
+                    alertDialogBuilder(AlertType.ERROR,"Error","Verification Error","Ensure a unique server name and non blank password if enabled.");
                 }
 
             } catch (IOException E) {
