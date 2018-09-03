@@ -10,15 +10,18 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import model.PasswordManager;
 import view.RootPane;
 
 public class ApplicationLoader extends Application {
 
 	private RootPane view;
 	private Controller controller;
+	private PasswordManager passwordManager;
 
 	@Override
 	public void init() {
+		passwordManager = new PasswordManager(true);
 		view = new RootPane();
 
 		controller = new Controller(view);
@@ -48,8 +51,6 @@ public class ApplicationLoader extends Application {
 		}
 
 
-	public static void main(String[] args) {
-		launch(args);
-	}
+	public static void main(String[] args) { launch(args); }
 
 }

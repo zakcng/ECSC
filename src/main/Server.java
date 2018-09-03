@@ -1,17 +1,17 @@
 package main;
 import com.sun.security.sasl.Provider;
 
-import model.Chat;
-import model.FileManager;
-import model.Protocol;
-import model.User;
+import model.*;
 
 import java.io.*;
+import java.net.InetAddress;
+import java.security.NoSuchAlgorithmException;
 import java.security.Security;
 import java.util.*;
 import javax.net.ssl.SSLServerSocket;
 import javax.net.ssl.SSLServerSocketFactory;
 import javax.net.ssl.SSLSocket;
+import java.net.InetAddress;
 
 //TODO - when user connection closes remove user from chat.
 public class Server {
@@ -19,8 +19,6 @@ public class Server {
     private static final String DEFAULT_IP = "127.0.0.1";
     private static final String DEFAULT_REQUEST_PORT = "10000";
     private static final String DEFAULT_MSG_PORT = "10001";
-    private static final String DEFAULT_KEYSTORE = System.getProperty("user.dir") + "/data/myKeyStore.jks";
-    private static final String DEFAULT_KEYSTORE_PASSWORD = "password";
     private static ArrayList<Connection> clientList = new ArrayList<>();
     private static FileManager fileManager;
 
@@ -28,9 +26,13 @@ public class Server {
     private static HashMap<String, Chat> chats = new HashMap<>();
 
     public static void main(String[] args) throws IOException {
+        InetAddress inetAddress = InetAddress.getLocalHost();
+        PasswordManager passwordManager = new PasswordManager(false);
+
         Security.addProvider(new Provider());
-        System.setProperty("javax.net.ssl.keyStore", DEFAULT_KEYSTORE);
-        System.setProperty("javax.net.ssl.keyStorePassword", DEFAULT_KEYSTORE_PASSWORD);
+        System.setProperty("javax.net.ssl.keyStore", System.getProperty("user.dir") + "/data/" + passwordManager.getKeyStore());
+        System.setProperty("javax.net.ssl.keyStorePassword", passwordManager.getKeyStorePass());
+
 
         SSLServerSocketFactory sslServerSocketFactory = (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
         SSLServerSocket sslServerRequestSocket = (SSLServerSocket) sslServerSocketFactory.createServerSocket(Integer.parseInt(DEFAULT_REQUEST_PORT));
