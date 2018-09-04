@@ -24,7 +24,7 @@ public class ApplicationLoader extends Application {
 		passwordManager = new PasswordManager(true);
 		view = new RootPane();
 
-		controller = new Controller(view);
+		controller = new Controller(view, passwordManager);
 	}
 
 	@Override

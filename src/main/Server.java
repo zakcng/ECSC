@@ -16,13 +16,10 @@ import java.net.InetAddress;
 //TODO - when user connection closes remove user from chat.
 public class Server {
     //Default values provided if no arguments are provided during execution.
-    private static final String DEFAULT_IP = "127.0.0.1";
     private static final String DEFAULT_REQUEST_PORT = "10000";
     private static final String DEFAULT_MSG_PORT = "10001";
     private static ArrayList<Connection> clientList = new ArrayList<>();
     private static FileManager fileManager;
-
-    //TODO load in chats
     private static HashMap<String, Chat> chats = new HashMap<>();
 
     public static void main(String[] args) throws IOException {
@@ -30,8 +27,8 @@ public class Server {
         PasswordManager passwordManager = new PasswordManager(false);
 
         Security.addProvider(new Provider());
-        System.setProperty("javax.net.ssl.keyStore", System.getProperty("user.dir") + "/data/" + passwordManager.getKeyStore());
-        System.setProperty("javax.net.ssl.keyStorePassword", passwordManager.getKeyStorePass());
+        System.setProperty("javax.net.ssl.keyStore", System.getProperty("user.dir") + "/data/" + passwordManager.getStore());
+        System.setProperty("javax.net.ssl.keyStorePassword", passwordManager.getStorePass());
 
 
         SSLServerSocketFactory sslServerSocketFactory = (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();

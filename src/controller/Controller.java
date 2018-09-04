@@ -9,6 +9,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextInputDialog;
 import main.Client;
 import main.ClientThread;
+import model.PasswordManager;
 import model.User;
 import model.Chat;
 import model.Protocol;
@@ -28,15 +29,16 @@ public class Controller {
     private NewChatPane ncp;
     private ChatPane cp;
     private Client client;
-
+    private PasswordManager passwordManager;
     private User user;
 
     //transient fields
     private transient String hashedPass = null;
 
-    public Controller(RootPane view) {
+    public Controller(RootPane view, PasswordManager passwordManager) {
         //initialise model and view fields
         this.view = view;
+        this.passwordManager = passwordManager;
 
         mmb = view.getMenuBar();
         ncp = view.getNcp();
@@ -50,7 +52,7 @@ public class Controller {
         this.attachBindings();
 
         try {
-            this.client = new Client();
+            this.client = new Client(passwordManager.getIp(), passwordManager.getStore(), passwordManager.getStorePass());
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(0);

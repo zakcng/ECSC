@@ -18,7 +18,6 @@ import org.bouncycastle.util.encoders.Hex;
 
 public class Client {
     //Default values provided if no arguments are provided during execution.
-    private final String DEFAULT_IP = "127.0.0.1";
     private static final Integer DEFAULT_REQUEST_PORT = 10000;
     private static final Integer DEFAULT_MSG_PORT = 10001;
     private SSLSocket sslRequestSocket;
@@ -33,14 +32,14 @@ public class Client {
     /**
      * Will try to connect to default ip address and port nuber
      */
-    public Client() throws IOException {
+    public Client(String ip, String keyStore, String keyStorePass) throws IOException {
         Security.addProvider(new Provider());
-        System.setProperty("javax.net.ssl.trustStore", DEFAULT_TRUSTSTORE);
-        System.setProperty("javax.net.ssl.trustStorePassword", DEFAULT_TRUSTORE_PASSWORD);
+        System.setProperty("javax.net.ssl.trustStore", System.getProperty("user.dir") + "/data/" + keyStore);
+        System.setProperty("javax.net.ssl.trustStorePassword", keyStorePass);
 
         SSLSocketFactory sslSocketFactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
-        this.sslRequestSocket = (SSLSocket) sslSocketFactory.createSocket(DEFAULT_IP, DEFAULT_REQUEST_PORT);
-        this.sslMsgSocket = (SSLSocket) sslSocketFactory.createSocket(DEFAULT_IP, DEFAULT_MSG_PORT);
+        this.sslRequestSocket = (SSLSocket) sslSocketFactory.createSocket(ip, DEFAULT_REQUEST_PORT);
+        this.sslMsgSocket = (SSLSocket) sslSocketFactory.createSocket(ip, DEFAULT_MSG_PORT);
 
         dataInputStream = new DataInputStream(sslRequestSocket.getInputStream());
         dataOutputStream = new DataOutputStream(sslRequestSocket.getOutputStream());
