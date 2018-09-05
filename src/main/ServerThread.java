@@ -9,6 +9,7 @@ import org.bouncycastle.util.encoders.Hex;
 
 import javax.net.ssl.SSLSocket;
 import java.io.*;
+import java.security.SecureRandom;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -95,11 +96,13 @@ public class ServerThread extends Thread {
             String hashedPass = dataInputStream.readUTF();
             Boolean passEnabled = dataInputStream.readBoolean();
             Boolean logEnabled = dataInputStream.readBoolean();
+            String salt = dataInputStream.readUTF();
+            System.out.println(salt);
 
             //TODO add regex for password to ensure security
             if (validChat(passEnabled, hashedPass, chatName) && !chatExists(chatName, chats)) {
                 hashedPass = passEnabled ? hashedPass : null;
-                Chat chat = new Chat(chatName, hashedPass, logEnabled, passEnabled, "salt");
+                Chat chat = new Chat(chatName, hashedPass, logEnabled, passEnabled, salt);
                 chats.put(chatName, chat);
                 FileManager.encryptAndWrite("This is a secret", FileManager.chatsToString(chats), FileManager.getChatFile());
                 dataOutputStream.writeByte(Protocol.OK.ordinal());
@@ -110,16 +113,21 @@ public class ServerThread extends Thread {
         } else if (request == Protocol.JOIN.ordinal()) {
             try {
                 String chatName = dataInputStream.readUTF();
+
+                Chat chat = Server.getChats().get(chatName);
+
+                dataOutputStream.writeUTF(chat.getChatSalt());
                 String hashedPass = dataInputStream.readUTF();
+
                 User user = (User) objectInputStream.readObject();
                 user.setIpAddress(sslSocket.getInetAddress().toString());
                 user.setRequestSocket(sslSocket);
 
-                Chat chat = Server.getChats().get(chatName);
 
                 System.out.println("Hashed Pass: " + hashedPass + ", chat.getChatPassword(): " + chat.getChatPassword());
+                boolean passEnabled = chat.getPassEnabled();
 
-                if (!chat.getPassEnabled() || (hashedPass.equals(chat.getChatPassword()) && !user.blocked())) {
+                if (!passEnabled || (passEnabled && hashedPass.equals(chat.getChatPassword()))) {
                     chat.getUsers().add(user);
                     dataOutputStream.writeByte(Protocol.OK.ordinal());
                     Server.sendUpdatedUsers(chatUsersToString(chat), Server.getChatBySocket(sslSocket));
@@ -155,9 +163,7 @@ public class ServerThread extends Thread {
 
     public static String hash(String stringToHash) {
 
-        //salt();
-
-        String temp = stringToHash; //+ salt();
+        String temp = stringToHash;
 
         SHA3.DigestSHA3 digestSHA3 = new SHA3.Digest512();
         byte[] digest = digestSHA3.digest(temp.getBytes());

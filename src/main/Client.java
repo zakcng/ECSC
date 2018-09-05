@@ -4,6 +4,7 @@ import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
 import java.io.*;
 import java.net.ConnectException;
+import java.security.SecureRandom;
 import java.security.Security;
 import java.util.ArrayList;
 import model.Protocol;
@@ -52,12 +53,13 @@ public class Client {
      * @return request result status
      * @throws IOException
      */
-    public int createChat(String name, String passHash, Boolean passEnabled, Boolean logEnabled) throws IOException {
+    public int createChat(String name, String passHash, Boolean passEnabled, Boolean logEnabled, String salt) throws IOException {
         dataOutputStream.writeByte(Protocol.CREATE.ordinal());
         dataOutputStream.writeUTF(name);
         dataOutputStream.writeUTF(passHash);
         dataOutputStream.writeBoolean(passEnabled);
         dataOutputStream.writeBoolean(logEnabled);
+        dataOutputStream.writeUTF(salt);
         return dataInputStream.readByte();
     }
 
@@ -84,10 +86,12 @@ public class Client {
      * @return request result status
      * @throws IOException
      */
-    public int joinChat(String chatName, String hashedPass, User user) throws IOException {
+    public int joinChat(String chatName, String pass, User user) throws IOException {
         dataOutputStream.writeByte(Protocol.JOIN.ordinal());
         dataOutputStream.writeUTF(chatName);
-        dataOutputStream.writeUTF(hashedPass); //TODO replace password with hashedPass
+        String salt = dataInputStream.readUTF();
+        System.out.println(salt);
+        dataOutputStream.writeUTF(hash(pass + salt)); //TODO replace password with hashedPass;
         objectOutputStream.writeObject(user);
         return dataInputStream.readByte();
     }
@@ -104,10 +108,7 @@ public class Client {
     }
 
     public String hash(String stringToHash) {
-
-        //salt();
-
-        String temp = stringToHash; //+ salt();
+        String temp = stringToHash;
 
         SHA3.DigestSHA3 digestSHA3 = new SHA3.Digest512();
         byte[] digest = digestSHA3.digest(temp.getBytes());
@@ -116,13 +117,13 @@ public class Client {
     }
 
     public String salt() {
-        //TODO SALT FUNCTION
-       // System.out.println("Salt:");
-       // System.out.println(salt().getBytes(StandardCharsets.UTF_8));
-        //System.out.println("Salt:" + salt().getBytes(StandardCharsets.UTF_8));
-
-        return " ";
+        int seedBytes = 20;
+        SecureRandom rng = new SecureRandom();
+        byte[] salt = rng.generateSeed(seedBytes);
+        return salt.toString();
     }
+
+
 
     public static DataOutputStream getDataOutputStream() {
         return dataOutputStream;

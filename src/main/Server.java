@@ -35,7 +35,7 @@ public class Server {
         SSLServerSocket sslServerRequestSocket = (SSLServerSocket) sslServerSocketFactory.createServerSocket(Integer.parseInt(DEFAULT_REQUEST_PORT));
         SSLServerSocket sslServerMsgSocket = (SSLServerSocket) sslServerSocketFactory.createServerSocket(Integer.parseInt(DEFAULT_MSG_PORT));
 
-        fileManager = new FileManager("data/chats.encrypted");
+        fileManager = new FileManager("data/chats.encrypted", passwordManager.getFilePass());
         
         while (!sslServerRequestSocket.isClosed()) {
             try {
@@ -90,7 +90,6 @@ public class Server {
                     c.dataOutputStream.writeUTF(users);
                 }
             } catch (IOException e) {
-                System.out.println("Lmao");
                 e.printStackTrace();
             }
         }

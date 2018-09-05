@@ -15,11 +15,10 @@ import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
 public class FileManager {
-    private transient String key;
     private static File chatFile;
 
     //TODO - let owner of server enter key on start up
-    public FileManager(String dir) {
+    public FileManager(String dir, String key) {
         chatFile = new File(dir);
 
         try {
@@ -29,7 +28,7 @@ public class FileManager {
                 System.out.println("File does not exist. New file created.");
             } else {
                 System.out.println("File exists");
-                HashMap<String, Chat> chats = decryptAndRead("This is a secret", chatFile);
+                HashMap<String, Chat> chats = decryptAndRead(key, chatFile);
                 Server.setChats(chats);
             }
         } catch (IOException e) {

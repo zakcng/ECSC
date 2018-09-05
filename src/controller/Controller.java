@@ -93,9 +93,8 @@ public class Controller {
 
         public void handle(ActionEvent e) {
             String name = lp.getNcp().getTxtName();
-            hashedPass = client.hash(lp.getNcp().getTxtChatPassword());
-
-            System.out.println(hashedPass);
+            String salt = client.salt();
+            hashedPass = client.hash(lp.getNcp().getTxtChatPassword() + salt);
 
             Boolean passEnabled = lp.getNcp().getCbChatPassChecked().isSelected();
             Boolean logEnabled = lp.getNcp().getCbChatLogChecked().isSelected();
@@ -103,7 +102,7 @@ public class Controller {
             try {
                 int response = -1;
 
-                response = client.createChat(name, hashedPass, passEnabled, logEnabled);
+                response = client.createChat(name, hashedPass, passEnabled, logEnabled, salt);
 
                 if (response == Protocol.ERROR.ordinal()) {
                     System.out.println("Error, server could not create chat.");
