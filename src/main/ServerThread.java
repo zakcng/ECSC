@@ -97,7 +97,7 @@ public class ServerThread extends Thread {
             Boolean passEnabled = dataInputStream.readBoolean();
             Boolean logEnabled = dataInputStream.readBoolean();
             String salt = dataInputStream.readUTF();
-            System.out.println(salt);
+            System.out.println("HANDLE REQUEST SALT:" + salt);
 
             //TODO add regex for password to ensure security
             if (validChat(passEnabled, hashedPass, chatName) && !chatExists(chatName, chats)) {
@@ -115,7 +115,7 @@ public class ServerThread extends Thread {
                 String chatName = dataInputStream.readUTF();
 
                 Chat chat = Server.getChats().get(chatName);
-
+                System.out.println("Handle Request JOIN salt: " + chat.getChatSalt());
                 dataOutputStream.writeUTF(chat.getChatSalt());
                 String hashedPass = dataInputStream.readUTF();
 
@@ -126,8 +126,9 @@ public class ServerThread extends Thread {
 
                 System.out.println("Hashed Pass: " + hashedPass + ", chat.getChatPassword(): " + chat.getChatPassword());
                 boolean passEnabled = chat.getPassEnabled();
+                System.out.println(passEnabled);
 
-                if (!passEnabled || (passEnabled && hashedPass.equals(chat.getChatPassword()))) {
+                if (!passEnabled || (hashedPass.equals(chat.getChatPassword()))) {
                     chat.getUsers().add(user);
                     dataOutputStream.writeByte(Protocol.OK.ordinal());
                     Server.sendUpdatedUsers(chatUsersToString(chat), Server.getChatBySocket(sslSocket));

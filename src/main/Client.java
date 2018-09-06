@@ -54,6 +54,7 @@ public class Client {
      * @throws IOException
      */
     public int createChat(String name, String passHash, Boolean passEnabled, Boolean logEnabled, String salt) throws IOException {
+        System.out.println("CREATE CHAT SALT: " + salt);
         dataOutputStream.writeByte(Protocol.CREATE.ordinal());
         dataOutputStream.writeUTF(name);
         dataOutputStream.writeUTF(passHash);
@@ -90,7 +91,10 @@ public class Client {
         dataOutputStream.writeByte(Protocol.JOIN.ordinal());
         dataOutputStream.writeUTF(chatName);
         String salt = dataInputStream.readUTF();
-        System.out.println(salt);
+        System.out.println("Join Chat Client salt: " + salt);
+        System.out.println("Join Chat Client password: " + pass);
+        String hashedPass = hash(pass + salt);
+        System.out.println("Join Chat Client hashed pass: " + hashedPass);
         dataOutputStream.writeUTF(hash(pass + salt)); //TODO replace password with hashedPass;
         objectOutputStream.writeObject(user);
         return dataInputStream.readByte();

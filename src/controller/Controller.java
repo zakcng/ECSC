@@ -95,7 +95,7 @@ public class Controller {
             String name = lp.getNcp().getTxtName();
             String salt = client.salt();
             hashedPass = client.hash(lp.getNcp().getTxtChatPassword() + salt);
-
+            System.out.println("CREATE CHAT HANDLER SALT: " + salt);
             Boolean passEnabled = lp.getNcp().getCbChatPassChecked().isSelected();
             Boolean logEnabled = lp.getNcp().getCbChatLogChecked().isSelected();
 
@@ -153,7 +153,7 @@ public class Controller {
                 //Retrieve password from user
                 String password = passwordDialog();
 
-                int response = client.joinChat(lp.getSelectedChat(), client.hash(password), user);
+                int response = client.joinChat(lp.getSelectedChat(), password, user);
 
 
                 if (response == Protocol.OK.ordinal()) {
