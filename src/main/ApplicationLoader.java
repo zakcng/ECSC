@@ -40,10 +40,10 @@ public class ApplicationLoader extends Application {
 
 		stage.setScene(new Scene(view));
 
-		File file = new File("data/epclogo.png");
+		File file = new File(System.getProperty("user.dir") + "/data/epclogo.png");
 
 		if (file.exists()) {
-			FileInputStream inputStream = new FileInputStream("data/epclogo.png");
+			FileInputStream inputStream = new FileInputStream(System.getProperty("user.dir") + "/data/epclogo.png");
 			Image anotherIcon = new Image(inputStream);
 			stage.getIcons().add(anotherIcon);
 		}
