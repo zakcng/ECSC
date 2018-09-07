@@ -19,10 +19,6 @@ import java.util.Random;
 
 public class ServerThread extends Thread {
     private SSLSocket sslSocket;
-    private DataInputStream dataInputStream;
-    private DataOutputStream dataOutputStream;
-    private ObjectInputStream objectInputStream;
-    private static Random random = new Random();
 
     public ServerThread(SSLSocket sslSocket) throws IOException {
         this.sslSocket = sslSocket;
@@ -43,9 +39,13 @@ public class ServerThread extends Thread {
             }
         } catch (EOFException e) {
             System.out.println("EOFException!!!");
+
             Chat chat = Server.getChatBySocket(sslSocket);
-            chat.removeUser(sslSocket);
-            Server.sendUpdatedUsers(chatUsersToString(chat), chat);
+            if (chat != null) {
+                System.out.println(Server.getChatBySocket(sslSocket));
+                Server.getChatBySocket(sslSocket).removeUser(sslSocket);
+                Server.sendUpdatedUsers(chatUsersToString(chat), chat);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

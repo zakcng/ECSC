@@ -7,6 +7,7 @@ import java.io.*;
 import java.net.InetAddress;
 import java.security.NoSuchAlgorithmException;
 import java.security.Security;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import javax.net.ssl.SSLServerSocket;
 import javax.net.ssl.SSLServerSocketFactory;
@@ -69,6 +70,9 @@ public class Server {
 
     protected static void msgConnections(String msg, SSLSocket senderSocket) throws IOException {
         Chat chat = getChatBySocket(senderSocket);
+        Date date=new Date();
+        String simpleDate = new SimpleDateFormat("HH:mm").format(date);
+        msg = simpleDate + " " + msg;
 
         if (chat == null) System.out.println("Could not send message. Chat does not exist.");
         for (Connection c: getConnections()) {
