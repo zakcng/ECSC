@@ -50,6 +50,7 @@ public class ChatPane extends BorderPane {
 
         txtMessages = new TextArea();
         txtMessages.setEditable(false);
+        txtMessages.setWrapText(true);
 
         HBox bottomContainer = new HBox();
         btnSend = new Button("Send");
