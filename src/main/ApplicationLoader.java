@@ -7,11 +7,15 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import model.PasswordManager;
 import view.RootPane;
+
+import java.io.File;
+import java.io.FileInputStream;
 
 public class ApplicationLoader extends Application {
 
@@ -33,7 +37,17 @@ public class ApplicationLoader extends Application {
 		stage.setMinHeight(550);
 		stage.setTitle("EPC");
 
+
 		stage.setScene(new Scene(view));
+
+		File file = new File("data/icon.png");
+
+		if (file.exists()) {
+			FileInputStream inputStream = new FileInputStream("data/icon.png");
+			Image anotherIcon = new Image(inputStream);
+			stage.getIcons().add(anotherIcon);
+		}
+
 		stage.show();
 
 		//Add function
