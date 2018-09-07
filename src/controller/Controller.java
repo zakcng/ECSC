@@ -96,8 +96,16 @@ public class Controller {
             String salt = client.salt();
             hashedPass = client.hash(lp.getNcp().getTxtChatPassword() + salt);
             System.out.println("CREATE CHAT HANDLER SALT: " + salt);
-            Boolean passEnabled = lp.getNcp().getCbChatPassChecked().isSelected();
+            Boolean passEnabled = lp.getNcp().getCbChatPassChecked();
             Boolean logEnabled = lp.getNcp().getCbChatLogChecked().isSelected();
+
+            //Check user knows password was not enabled but text was entered
+            Boolean passEmpty = lp.getNcp().getTxtChatPassword().isEmpty();
+            Boolean cbChecked =  lp.getNcp().getCbChatPassChecked();
+            if (!passEmpty && !cbChecked){
+                System.out.println("Password was not enabled but text was entered");
+                alertDialogBuilder(AlertType.WARNING,"Warning","Verification Error","You entered a password but did not enable one.");
+            }
 
             try {
                 int response = -1;

@@ -61,8 +61,8 @@ public class NewChatPane extends BorderPane{
         return txtChatPassword.getText();
     }
 
-    public CheckBox getCbChatPassChecked() {
-        return cbChatPassChecked;
+    public Boolean getCbChatPassChecked() {
+        return cbChatPassChecked.isSelected();
     }
 
     public CheckBox getCbChatLogChecked() {
