@@ -55,7 +55,6 @@ public class ApplicationLoader extends Application {
 			@Override
 			public void handle(KeyEvent keyEvent) {
 				if (keyEvent.getCode() == KeyCode.ENTER && view.currentTab() == 1) {
-					System.out.println("Event triggered");
 					controller.sendMessageFunc();
 
 				}

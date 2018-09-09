@@ -24,10 +24,7 @@ public class FileManager {
         try {
             if (!chatFile.exists()) {
                 chatFile.createNewFile();
-
-                System.out.println("File does not exist. New file created.");
             } else {
-                System.out.println("File exists");
                 HashMap<String, Chat> chats = decryptAndRead(key, chatFile);
                 Server.setChats(chats);
             }

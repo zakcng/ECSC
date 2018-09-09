@@ -95,7 +95,6 @@ public class Controller {
             String name = lp.getNcp().getTxtName();
             String salt = client.salt();
             hashedPass = client.hash(lp.getNcp().getTxtChatPassword() + salt);
-            System.out.println("CREATE CHAT HANDLER SALT: " + salt);
             Boolean passEnabled = lp.getNcp().getCbChatPassChecked();
             Boolean logEnabled = lp.getNcp().getCbChatLogChecked().isSelected();
 
@@ -122,25 +121,6 @@ public class Controller {
                 E.printStackTrace();
             }
 
-			/*
-			System.out.println("Chat room name:");
-			System.out.println(lp.getNcp().getTxtName());
-
-			System.out.println("Chat room password:");
-			System.out.println(lp.getNcp().getTxtChatPassword());
-
-			System.out.println("Is password checked?");
-			System.out.println(lp.getNcp().getCbChatPassChecked().isSelected());
-
-			System.out.println("Is chat logs checked?");
-			System.out.println(lp.getNcp().getCbChatLogChecked().isSelected());
-			/*
-			/*
-			if(lp.getNcp().getCbChatPassChecked().isSelected() == false) {
-				createChat(lp.getNcp().getTxtName(),null,lp.getNcp().getCbChatLogChecked().isSelected());
-			} else
-			createChat(lp.getNcp().getTxtName(),lp.getNcp().getTxtChatPassword(),lp.getNcp().getCbChatLogChecked().isSelected());
-			*/
         }
     }
 
@@ -151,12 +131,6 @@ public class Controller {
             try {
                 cp.clearTxtMessages();
                 user = new User(lp.getNickname());
-
-                System.out.println(user.getIpAddress());
-                System.out.println(user.getNickname());
-
-                //Print selected chat name as String
-                System.out.println(lp.getSelectedChat().toString());
 
                 //Retrieve password from user
                 String password = passwordDialog();
@@ -208,7 +182,6 @@ public class Controller {
 
         public void handle(ActionEvent e) {
             //Send Chat Button Handler
-            System.out.println(view.getRootPane().currentTab());
             sendMessageFunc();
 
         }
@@ -218,7 +191,6 @@ public class Controller {
     private class TestHandler implements EventHandler<ActionEvent> {
 
         public void handle(ActionEvent e) {
-            System.out.println("Testing");
             System.out.println(cp.getTxtMessage());
         }
     }

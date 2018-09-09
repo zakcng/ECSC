@@ -12,7 +12,7 @@ public class User implements Serializable {
     private SSLSocket requestSocket;
 
     public User(String nickname) throws Exception {
-        this.nickname = nickname + "@" + InetAddress.getLocalHost().getHostName().toString();
+        this.nickname = nickname;
         this.passAttempts = 0;
         this.blocked = false;
     }

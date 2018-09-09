@@ -5,16 +5,13 @@ import model.*;
 
 import java.io.*;
 import java.net.InetAddress;
-import java.security.NoSuchAlgorithmException;
 import java.security.Security;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import javax.net.ssl.SSLServerSocket;
 import javax.net.ssl.SSLServerSocketFactory;
-import javax.net.ssl.SSLSocket;
-import java.net.InetAddress;
+import javax.net.ssl.SSLSocket;;
 
-//TODO - when user connection closes remove user from chat.
 public class Server {
     //Default values provided if no arguments are provided during execution.
     private static final String DEFAULT_REQUEST_PORT = "10000";
@@ -81,7 +78,6 @@ public class Server {
                 c.dataOutputStream.writeUTF(msg);
             }
         }
-        System.out.println("Gets to end of msgConnections");
     }
 
     protected static void sendUpdatedUsers(String users, Chat chat) {
@@ -97,7 +93,6 @@ public class Server {
                 e.printStackTrace();
             }
         }
-        System.out.println("Gets to end of msgConnections");
     }
 
     public static Chat getChatBySocket(SSLSocket sslSocket) {
@@ -125,7 +120,6 @@ public class Server {
         Server.chats = chats;
     }
 
-    //TODO - open new socket in connection which is used to broadcast messages to ips belonging to a particular chat.
     private static class Connection {
         private DataInputStream dataInputStream;
         private DataOutputStream dataOutputStream;

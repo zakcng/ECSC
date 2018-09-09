@@ -41,7 +41,7 @@ public class ClientThread extends Thread {
                     users = dataInputStream.readUTF();
 
                     List<String> nickNames = Arrays.asList(users.split(","));
-                    //List<String> items = chatPane.getListNicknames();
+                    List<String> items = chatPane.getListNicknames();
 
                     Platform.runLater(new Runnable() {
                         @Override
@@ -49,9 +49,9 @@ public class ClientThread extends Thread {
                             chatPane.clearListNicknames();
 
                             for (String nickName: nickNames) {
-                                //if (!items.contains(nickName)) {
-                                chatPane.addUserToList(nickName);
-                                //}
+                                if (!items.contains(nickName)) {
+                                    chatPane.addUserToList(nickName);
+                                }
                             }
                         }
                     });

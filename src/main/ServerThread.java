@@ -38,11 +38,8 @@ public class ServerThread extends Thread {
                 handleRequest(clientRequest, dataInputStream, dataOutputStream, objectInputStream, sslSocket, Server.getChats());
             }
         } catch (EOFException e) {
-            System.out.println("EOFException!!!");
-
             Chat chat = Server.getChatBySocket(sslSocket);
             if (chat != null) {
-                System.out.println(Server.getChatBySocket(sslSocket));
                 Server.getChatBySocket(sslSocket).removeUser(sslSocket);
                 Server.sendUpdatedUsers(chatUsersToString(chat), chat);
             }
@@ -97,7 +94,6 @@ public class ServerThread extends Thread {
             Boolean passEnabled = dataInputStream.readBoolean();
             Boolean logEnabled = dataInputStream.readBoolean();
             String salt = dataInputStream.readUTF();
-            System.out.println("HANDLE REQUEST SALT:" + salt);
 
             //TODO add regex for password to ensure security
             if (validChat(passEnabled, hashedPass, chatName) && !chatExists(chatName, chats)) {
@@ -115,7 +111,6 @@ public class ServerThread extends Thread {
                 String chatName = dataInputStream.readUTF();
 
                 Chat chat = Server.getChats().get(chatName);
-                System.out.println("Handle Request JOIN salt: " + chat.getChatSalt());
                 dataOutputStream.writeUTF(chat.getChatSalt());
                 String hashedPass = dataInputStream.readUTF();
 
@@ -124,9 +119,7 @@ public class ServerThread extends Thread {
                 user.setRequestSocket(sslSocket);
 
 
-                System.out.println("Hashed Pass: " + hashedPass + ", chat.getChatPassword(): " + chat.getChatPassword());
                 boolean passEnabled = chat.getPassEnabled();
-                System.out.println(passEnabled);
 
                 if (!passEnabled || (hashedPass.equals(chat.getChatPassword()))) {
                     chat.getUsers().add(user);
@@ -147,14 +140,11 @@ public class ServerThread extends Thread {
             }
         } else if (request == Protocol.SEND.ordinal()) {
             String msg = dataInputStream.readUTF();
-            System.out.println(msg);
             if (!msg.equals("")) {
-                System.out.println("SEND");
                 Server.msgConnections(msg, sslSocket);
                 dataOutputStream.writeByte(Protocol.OK.ordinal());
 
             } else {
-                System.out.println("Could not print message.");
                 dataOutputStream.writeByte(Protocol.ERROR.ordinal());
             }
         } else {
